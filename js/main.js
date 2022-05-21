@@ -26,19 +26,34 @@ function editableWilayah(param) {
   $("#editKeterangan").val(exp[4]);
 }
 
+// function editableJadwal(param) {
+//     let data = $(param).data("id");
+//     let exp = data.split("~");
+//     console.log(data);
+    
+//   $("#editIdJadwal").val(exp[0]);
+//   $("#editIdRute").val(exp[1]);
+//   $("#editIdkelompok").val(exp[2]);
+// //   $("#editIdwilayah").val(exp[3]);
+//   $("#editNamaJadwal").val(exp[3]);
+//   $("#editTanggal").val(exp[4]);
+//   $("#editidRute").val(exp[5]);
+//   $("#editCatatan").val(exp[6]);
+// }
+
 function editableJadwal(param) {
     let data = $(param).data("id");
     let exp = data.split("~");
     console.log(data);
+    console.log(exp);
     
   $("#editIdJadwal").val(exp[0]);
   $("#editIdRute").val(exp[1]);
   $("#editIdkelompok").val(exp[2]);
-  $("#editIdwilayah").val(exp[3]);
-  $("#editNamaJadwal").val(exp[4]);
-  $("#editTanggal").val(exp[5]);
-  $("#editidRute").val(exp[6]);
-  $("#editCatatan").val(exp[7]);
+  $("#editNamaJadwal").val(exp[3]);
+  $("#editTanggal").val(exp[4]);
+  $("#editidRute").val(exp[5]);
+  $("#editCatatan").val(exp[6]);
 }
 
 function editableKelompok(param) {
@@ -89,6 +104,30 @@ function editablePetugas(param) {
       $("#editBagian").val(exp[6]);
       $("#editIdkel").val(exp[7]);
       $("#editStatus").val(exp[8]);
+    }
+
+function editableTugas(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+      console.log(data);
+      $("#editIdTugas").val(exp[0]);
+      $("#editPetugas").val(exp[1]);
+      $("#editWilayah").val(exp[2]);
+      $("#editJadwal").val(exp[3]);
+      $("#editCatatan").val(exp[4]);
+      $("#editKet").val(exp[5]);
+    }
+
+function editablePelaporan(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+      console.log(data);
+      $("#editIdPelaporan").val(exp[0]);
+      $("#editTugas").val(exp[1]);
+      $("#editPetugas").val(exp[2]);
+      $("#editCatatan").val(exp[3]);
+      $("#editFile").val(exp[4]);
+      $("#editSubmit").val(exp[5]);
     }
 
 function getProvinsi() {

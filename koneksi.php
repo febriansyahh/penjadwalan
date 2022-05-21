@@ -8,7 +8,6 @@ define('SITE_ROOT', realpath(dirname(__FILE__)));
 
 $con = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
-
 function LoginUser()
 {
     global $con;
@@ -31,10 +30,6 @@ function LoginUser()
         echo "<script>alert('Login Gagal!!')</script>";
         echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
     }
-}
-
-function logout() {
-    session_destroy();
 }
 
 function rute()
@@ -319,7 +314,8 @@ function jadwal()
 function getjadwal()
 {
     global $con;
-    $sql = "SELECT a.*, b.nama_kelompok, c.rute, c.lokasi, d.nama FROM jadwal a JOIN kelompok b ON a.id_kelompok=b.id_kelompok JOIN rute c ON a.id_rute=c.id_rute JOIN wilayah d ON b.id_wilayah=d.id_wilayah";
+    // $sql = "SELECT a.*, b.nama_kelompok, c.rute, c.lokasi, d.nama FROM jadwal a JOIN kelompok b ON a.id_kelompok=b.id_kelompok JOIN rute c ON a.id_rute=c.id_rute JOIN wilayah d ON b.id_wilayah=d.id_wilayah";
+    $sql = "SELECT a.*, b.nama_kelompok, c.rute, c.lokasi FROM jadwal a JOIN kelompok b ON a.id_kelompok=b.id_kelompok JOIN rute c ON a.id_rute=c.id_rute";
     $query = mysqli_query($con, $sql);
     return $query;
 }
@@ -352,7 +348,7 @@ function updateJadwal()
 
     $sql_ubah = "UPDATE jadwal SET
         id_kelompok='" . $_POST['kelompok'] . "',
-        nm_jadwal='" . $_POST['jadwal'] . "',
+        nm_jadwal='" . $_POST['nama'] . "',
         tanggal='" . $_POST['tanggal'] . "',
         id_rute='" . $_POST['rute'] . "',
         catatan='" . $_POST['catatan'] . "'
@@ -404,13 +400,12 @@ function insertTugas()
 {
     global $con;
     $date = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO `tugas`(`id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `file`, `submitted`) VALUES(
+    $sql = "INSERT INTO `tugas`(`id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES(
                 '" . $_POST['petugas'] . "',
                 '" . $_POST['wilayah'] . "',
                 '" . $_POST['jadwal'] . "',
                 '" . $_POST['catatan'] . "',
                 '" . $_POST['keterangan'] . "',
-                '" . $_POST['file'] . "',
                 '" . $date . "')";
     $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
 
@@ -431,8 +426,7 @@ function updateTugas()
         id_petugas ='" . $_POST['petugas'] . "',
         id_jadwal ='" . $_POST['jadwal'] . "',
         catatan_tugas ='" . $_POST['catatan'] . "',
-        keterangan ='" . $_POST['keterangan'] . "',
-        file ='" . $_POST['file'] . "'
+        keterangan ='" . $_POST['keterangan'] . "'
         WHERE id_tugas ='" . $_POST['id'] . "'";
     $query_ubah = mysqli_query($con, $sql_ubah);
 
@@ -458,6 +452,62 @@ function deleteTugas($id)
     } else {
         echo "<script>alert('Hapus Gagal')</script>";
         echo "<meta http-equiv='refresh' content='0; url=index.php?v=tugas'>";
+    }
+}
+
+function insertPelaporan($upload)
+{
+    global $con;
+    $date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO `pelaporan`(`id_tugas`, `id_petugas`, `catatan`, `file`, `submitted`) VALUES(
+                '" . $_POST['tugas'] . "',
+                '" . $_POST['petugas'] . "',
+                '" . $_POST['catatan'] . "',
+                '" . $upload . "',
+                '" . $date . "')";
+    $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+    if ($query_insert) {
+        echo "<script>alert('Simpan Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    } else {
+        echo "<script>alert('Simpan Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    }
+}
+
+function upload_file($namePost, $codePetugas)
+{
+    global $con;
+
+    $getkode = "SELECT kode_petugas FROM petugas WHERE id_petugas = '" . $codePetugas . "' ";
+    $query = mysqli_query($con, $getkode);
+    $row = mysqli_fetch_row($query);
+    $kode = $row[0];
+
+    $ekstensi_diperbolehkan  = array('jpg', 'png', 'jpeg');
+    $date = date('Y-m-d');
+    $named = str_replace(' ', '_', $kode);
+    $nama = $_FILES[$namePost]['name'];
+    $x = explode('.', $nama);
+    $ekstensi = strtolower(end($x));
+    $namas = 'Pelaporan_' . $named . "_" . $date . "." . $ekstensi;
+    $ukuran = $_FILES[$namePost]['size'];
+    $file_tmp = $_FILES[$namePost]['tmp_name'];
+
+    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+        if ($ukuran < 41943040) {
+            $destination_path = getcwd() . DIRECTORY_SEPARATOR . 'file_data\pelaporan' . '/';
+
+            $target_path = $destination_path . $namas;
+
+            @move_uploaded_file($file_tmp, $target_path);
+            return $namas;
+        } else {
+            return;
+        }
+    } else {
+        return;
     }
 }
 

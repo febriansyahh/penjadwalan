@@ -13,7 +13,7 @@ if (isset($_SESSION['ses_username']) == "") {
 // session_destroy();
 
 // if(isset($_POST["logout"])){
-  
+
 // }
 error_reporting();
 error_reporting(E_ALL ^ E_NOTICE);
@@ -203,6 +203,15 @@ error_reporting(E_ALL ^ E_NOTICE);
               </a>
             </li>
 
+            <li class="nav-item ">
+              <a href="?v=pelaporan" class="nav-link">
+                <span class="sidebar-icon">
+                  <i class="fas fa-location"></i>
+                </span>
+                <span class="sidebar-text">Pelaporan</span>
+              </a>
+            </li>
+
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
             <li class="nav-item">
@@ -252,75 +261,27 @@ error_reporting(E_ALL ^ E_NOTICE);
                   <span class="sidebar-icon">
                     <i class="fas fa-road"></i>
                   </span>
-                  <span class="sidebar-text">Rute</span>
+                  <span class="sidebar-text">Tugas</span>
                 </span>
 
               </a>
             </li>
             <li class="nav-item ">
-              <a href="?v=wilayah" class="nav-link">
+              <a href="?v=pelaporan" class="nav-link">
                 <span class="sidebar-icon">
                   <i class="fas fa-location"></i>
                 </span>
-                <span class="sidebar-text">Wilayah</span>
+                <span class="sidebar-text">Pelaporan</span>
               </a>
             </li>
-            <li class="nav-item ">
-              <a href="pages/settings.html" class="nav-link">
-                <span class="sidebar-icon">
-                  <i class="fas fa-user-check"></i>
-                </span>
-                <span class="sidebar-text">Data Petugas</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="pages/settings.html" class="nav-link">
-                <span class="sidebar-icon">
-                  <i class="fas fa-users"></i>
-                </span>
-                <span class="sidebar-text">Data Kelompok</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="pages/settings.html" class="nav-link">
-                <span class="sidebar-icon">
-                  <i class="fas fa-calendar-day"></i>
-                </span>
-                <span class="sidebar-text">Data Jadwal</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="https://demo.themesberg.com/volt-pro/pages/calendar.html" class="nav-link d-flex justify-content-between">
-                <span>
-                  <span class="sidebar-icon">
-                    <i class="fas fa-clipboard"></i>
-                  </span>
-                  <span class="sidebar-text">Data Tugas</span>
-                </span>
 
-              </a>
-            </li>
             <li class="nav-item">
-              <a href="https://demo.themesberg.com/volt-pro/pages/map.html" class="nav-link d-flex justify-content-between">
+              <a href="#" class="nav-link d-flex justify-content-between">
                 <span>
                   <span class="sidebar-icon">
                     <i class="fas fa-file-alt"></i>
                   </span>
                   <span class="sidebar-text">Laporan</span>
-                </span>
-
-              </a>
-            </li>
-
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-
-            <li class="nav-item">
-              <a href="https://demo.themesberg.com/volt-pro/pages/map.html" class="nav-link d-flex justify-content-between">
-                <span>
-                  <span class="sidebar-icon">
-                    <i class="fas fa-user"></i>
-                  </span>
-                  <span class="sidebar-text">Data User</span>
                 </span>
 
               </a>
@@ -417,7 +378,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                 </a>
 
                 <div role="separator" class="dropdown-divider my-1"></div>
-                <a class="dropdown-item d-flex align-items-center" href="sign-in.php">
+                <a class="dropdown-item d-flex align-items-center" href="logout.php">
                   <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                   </svg>
@@ -491,6 +452,14 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "pages/tugas/aksi.php";
               break;
 
+            case 'pelaporan':
+              include "pages/pelaporan/index.php";
+              break;
+
+            case 'pelaporan_aksi':
+              include "pages/pelaporan/aksi.php";
+              break;
+
             case 'user':
               include "pages/user/index.php";
               break;
@@ -509,6 +478,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 
             case 'report_rute':
               include "pages/v_report/rute.php";
+              break;
+
+            case 'logout':
+              include "logout.php";
               break;
 
               // case 'report_transaksi' :

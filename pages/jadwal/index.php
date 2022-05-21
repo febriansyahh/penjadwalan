@@ -97,11 +97,12 @@ include_once("koneksi.php");
                                         <td><?php echo $no; ?></td>
                                         <td><?= $data['nm_jadwal'] ?></td>
                                         <td><?= $data['nama_kelompok'] ?></td>
-                                        <td><?= $data['tanggal'] ?></td>
+                                        <td><?= date('d-m-Y', strtotime($data['tanggal']));?></td>
                                         <td><?= $data['rute'] ?></td>
                                         <td><?= $data['catatan'] ?></td>
                                         <td>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editjadwal" onclick="editableJadwal(this)" data-id="<?php echo $data['id_jadwal'] . "~" . $data['id_rute'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['nama_jadwal'] . "~" . $data['tanggal'] . "~" . $data['id_rute'] . "~" . $data['catatan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                            <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editjadwal" onclick="editableJadwal(this)" data-id="<?php echo $data['id_jadwal'] . "~" . $data['id_rute'] . "~" . $data['id_kelompok'] . "~" . $data['nm_jadwal'] . "~" . $data['tanggal'] . "~" . $data['id_rute'] . "~" . $data['catatan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a> -->
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editjadwal" onclick="editableJadwal(this)" data-id="<?php echo $data['id_jadwal'] . "~" . $data['id_rute'] . "~" . $data['id_kelompok'] . "~" . $data['nm_jadwal'] . "~" . $data['tanggal'] . "~" . $data['id_rute'] . "~" . $data['catatan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
                                             <a href="?v=jadwal_aksi&kode=<?php echo $data['id_jadwal']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
@@ -133,15 +134,17 @@ include_once("koneksi.php");
                 </div>
                 <form action="?v=jadwal_aksi" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="">Jadwal</label>
-                            <input type="hidden" name="id" id="editIdJadwal" class="form-control" placeholder="Rute">
-                            <input type="text" name="nama" id="editNamaJadwal" class="form-control">
-                        </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="">Jadwal Kelompok</label>
+                                    <label for="">Jadwal</label>
+                                    <input type="hidden" name="id" id="editIdJadwal" class="form-control" placeholder="Rute">
+                                    <input type="text" name="nama" id="editNamaJadwal" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Kelompok</label>
                                     <select class="form-select form-select-sm" name="kelompok" id="editIdkelompok" aria-label=".form-select-sm">
                                         <option value="" selected>Pilih</option>
                                         <?php
@@ -153,27 +156,13 @@ include_once("koneksi.php");
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Wilayah</label>
-                                    <select class="form-select form-select-sm" name="wilayah" id="editIdkelompok" aria-label=".form-select-sm">
-                                        <option value="" selected>Pilih</option>
-                                        <?php
-                                        $a = wilayah();
-                                        foreach ($a as $key => $value) {
-                                            echo "<option value='" . $value["id_wilayah"] . "'>" . $value["nama"] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Rute</label>
-                                    <select class="form-select form-select-sm" name="wilayah" id="editIdRute" aria-label=".form-select-sm">
+                                    <select class="form-select form-select-sm" name="rute" id="editIdRute" aria-label=".form-select-sm">
                                         <option value="" selected>Pilih</option>
                                         <?php
                                         $rute = rute();
