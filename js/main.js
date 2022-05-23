@@ -148,6 +148,16 @@ function editableUser(param) {
       $("#editPetugas").val(exp[6]);
     }
 
+function selesaikanTugas(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+      console.log(data);
+      console.log(exp[2]);
+      $("#clearId").val(exp[0]);
+      $("#clearIdPetugas").val(exp[1]);
+      $("#cleartugas").val(exp[2]);
+    }
+
 function getProvinsi() {
 //     var settings = {
 //   "url": "http://dev.farizdotid.com/api/daerahindonesia/provinsi",

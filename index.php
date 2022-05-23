@@ -256,7 +256,7 @@ error_reporting(E_ALL ^ E_NOTICE);
               </a>
             </li>
             <li class="nav-item">
-              <a href="?v=rute" class="nav-link d-flex justify-content-between">
+              <a href="?v=tugas" class="nav-link d-flex justify-content-between">
                 <span>
                   <span class="sidebar-icon">
                     <i class="fas fa-road"></i>
