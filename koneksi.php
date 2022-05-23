@@ -655,8 +655,8 @@ function registrasi()
                     '" . $nama . "',
                     '" . $_POST['username'] . "',
                     '" . $_POST['password'] . "',
-                    '" . $_POST['actived'] . "',
-                    '" . $_POST['level'] . "',
+                    '1',
+                    '1',
                     '" . $idPetugas . "',
                     '" . $date . "')";
             $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
