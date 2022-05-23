@@ -570,6 +570,134 @@ function deletePelaporan($id)
     }
 }
 
+
+function registrasi()
+{
+    global $con;
+
+    $date = date("Y-m-d H:i:s");
+    $getid = "SELECT id_petugas, kode_petugas, nama FROM petugas WHERE kode_petugas = '". $_POST['petugas'] ."'";
+    $query = mysqli_query($con, $getid);
+    $row = mysqli_fetch_row($query);
+    $idPetugas = $row[0];
+    $kode = $row[1];
+    $nama = $row[2];
+
+    $pass = $_POST['password'];
+    $confirm = $_POST['confirm'];
+
+    if($row == NULL){
+        echo "<script>alert('Registrasi Gagal, Kode anda tidak terdaftar)</script>";
+        echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+    }else{
+        if($pass != $confirm)
+        {
+            echo "<script>alert('Registrasi Gagal, Repassword anda tidak sesuai')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+        }else{
+            $sql = "INSERT INTO `user`(`nama`, `username`, `password`, `actived`, `level`, `idPetugas`, `registered`) VALUES(
+                    '" . $nama . "',
+                    '" . $_POST['username'] . "',
+                    '" . $_POST['password'] . "',
+                    '" . $_POST['actived'] . "',
+                    '" . $_POST['level'] . "',
+                    '" . $idPetugas . "',
+                    '" . $date . "')";
+            $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+            if ($query_insert) {
+                echo "<script>alert('Simpan Berhasil')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+            } else {
+                echo "<script>alert('Simpan Gagal')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+            }
+        }
+    }
+}
+
+
+function user()
+{
+    global $con;
+    $sql = "SELECT * FROM user";
+    $query = mysqli_query($con,$sql);
+    return $query;
+}
+
+function insertUser()
+{
+    global $con;
+
+    $date = date("Y-m-d H:i:s");
+    $getid = "SELECT id_petugas, kode_petugas, nama FROM petugas WHERE id_petugas = '" . $_POST['petugas'] . "'";
+    $query = mysqli_query($con, $getid);
+    $row = mysqli_fetch_row($query);
+    $idPetugas = $row[0];
+    $kode = $row[1];
+    $nama = $row[2];
+
+    $pass = $_POST['password'];
+    $confirm = $_POST['confirm'];
+
+    $sql = "INSERT INTO `user`(`nama`, `username`, `password`, `actived`, `level`, `idPetugas`, `registered`) VALUES(
+            '" . $nama . "',
+            '" . $_POST['username'] . "',
+            '" . $_POST['password'] . "',
+            '" . $_POST['status'] . "',
+            '" . $_POST['level'] . "',
+            '" . $_POST['petugas'] . "',
+            '" . $date . "')";
+    $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+    if ($query_insert) {
+        echo "<script>alert('Simpan Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+    } else {
+        echo "<script>alert('Simpan Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+    }
+}
+
+function updateUser()
+{
+    global $con;
+
+    $sql_ubah = "UPDATE user SET
+        nama ='" . $_POST['nama'] . "',
+        username ='" . $_POST['username'] . "',
+        password ='" . $_POST['password'] . "',
+        actived ='" . $_POST['actived'] . "',
+        level ='" . $_POST['level'] . "',
+        idPetugas ='" . $_POST['petugas'] . "'
+        WHERE idUser ='" . $_POST['id'] . "'";
+    $query_ubah = mysqli_query($con, $sql_ubah);
+
+    if ($query_ubah) {
+        echo "<script>alert('Ubah Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
+    } else {
+        echo "<script>alert('Ubah Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
+    }
+}
+
+function deleteUser($id)
+{
+    global $con;
+
+    $sql = "DELETE FROM user WHERE idUser = '$id' ";
+    $query_delete = mysqli_query($con, $sql);
+
+    if ($query_delete) {
+        echo "<script>alert('Hapus Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
+    } else {
+        echo "<script>alert('Hapus Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
+    }
+}
+
 function getProvinsi()
 {
     $curl = curl_init();

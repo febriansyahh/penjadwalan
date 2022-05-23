@@ -130,6 +130,19 @@ function editablePelaporan(param) {
       $("#editSubmit").val(exp[5]);
     }
 
+function editableUser(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+      console.log(data);
+      $("#editIdUser").val(exp[0]);
+      $("#editNama").val(exp[1]);
+      $("#editUsername").val(exp[2]);
+      $("#editPass").val(exp[3]);
+      $("#editActiv").val(exp[4]);
+      $("#editLevel").val(exp[5]);
+      $("#editPetugas").val(exp[6]);
+    }
+
 function getProvinsi() {
 //     var settings = {
 //   "url": "http://dev.farizdotid.com/api/daerahindonesia/provinsi",
