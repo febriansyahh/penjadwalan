@@ -32,6 +32,26 @@ function LoginUser()
     }
 }
 
+function notif() 
+{
+    global $con;
+    $sql = "SELECT `id_pelaporan` FROM `pelaporan` WHERE `status` = '0' ";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+    $idpelaporan = $rows[0];
+
+    return $idpelaporan;
+}
+
+function notifikasi()
+{
+    global $con;
+    $sql = "SELECT a.*, b.nama FROM pelaporan a, petugas b WHERE a.id_petugas=b.id_petugas AND a.status='0'";
+    $query = mysqli_query($con, $sql);
+
+    return $query;
+}
+
 function rute()
 {
     global $con;
