@@ -189,6 +189,54 @@ function getpetugas()
     return $query;
 }
 
+
+function maxKodePetugas()
+{
+    global $con;
+
+    $carikode = mysqli_query($con, "SELECT MAX(kode_petugas) FROM petugas");
+    $datakode = mysqli_fetch_array($carikode);
+    $tahun = date('Y');
+    if ($datakode) {
+        // $nilaikode = substr($datakode[0], 3);
+        $nilaikode = substr($datakode[0], 9);
+        $kode = (int) $nilaikode;
+        $kode = $kode + 1;
+
+        // $hasilkode = "PLDN" . str_pad($kode, 2, "0", STR_PAD_LEFT);
+        $hasilkode = "PRT-" . $tahun . "-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
+    } else {
+        $hasilkode = "PRT-" . $tahun . "-001";
+    }
+
+    return $hasilkode;
+}
+
+function insertPetugas()
+{
+    global $con;
+    $date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO `petugas`(`kode_petugas`, `nama`, `is_gender`, `alamat`, `no_hp`, `bagian`, `id_kelompok`, `status`, `registered`) VALUES(
+                '" . $_POST['kode'] . "',
+                '" . $_POST['nama'] . "',
+                '" . $_POST['gender'] . "',
+                '" . $_POST['alamat'] . "',
+                '" . $_POST['nohp'] . "',
+                '" . $_POST['bagian'] . "',
+                '" . $_POST['kelompok'] . "',
+                '1',
+                '" . $date . "')";
+    $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+    if ($query_insert) {
+        echo "<script>alert('Simpan Data Petugas Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=petugas'>";
+    } else {
+        echo "<script>alert('Simpan Data Petugas Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=petugas'>";
+    }
+}
+
 function updatePetugas()
 {
     global $con;
@@ -637,9 +685,6 @@ function insertUser()
     $kode = $row[1];
     $nama = $row[2];
 
-    $pass = $_POST['password'];
-    $confirm = $_POST['confirm'];
-
     $sql = "INSERT INTO `user`(`nama`, `username`, `password`, `actived`, `level`, `idPetugas`, `registered`) VALUES(
             '" . $nama . "',
             '" . $_POST['username'] . "',
@@ -652,10 +697,10 @@ function insertUser()
 
     if ($query_insert) {
         echo "<script>alert('Simpan Berhasil')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
     } else {
         echo "<script>alert('Simpan Gagal')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=sign-in.php'>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
     }
 }
 

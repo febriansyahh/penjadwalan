@@ -18,31 +18,18 @@ include_once("koneksi.php");
                             </div>
                             <form action="?v=user_aksi" method="post" enctype="multipart/form-data">
                                 <div class="modal-body">
-
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="">Petugas</label>
-                                                <select class="form-select" name="petugas" aria-label="Default select example">
-                                                    <option selected>Pilih</option>
-                                                    <?php
-                                                    $a = petugas();
-                                                    foreach ($a as $key => $value) {
-                                                        echo "<option value='" . $value["id_petugas"] . "'>" . $value["nama"] . "</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="">Nama Pengguna</label>
-                                                <input type="text" name="nama" id="" class="form-control" placeholder="Nama user pengguna" required>
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="">Petugas</label>
+                                        <select class="form-select" name="petugas" aria-label="Default select example">
+                                            <option selected>Pilih</option>
+                                            <?php
+                                            $a = petugas();
+                                            foreach ($a as $key => $value) {
+                                                echo "<option value='" . $value["id_petugas"] . "'>" . $value["nama"] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
-
-
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">

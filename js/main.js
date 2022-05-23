@@ -88,7 +88,12 @@ function detPetugas(param) {
         $("#detNohp").val(exp[5]);
         $("#detBagian").val(exp[6]);
         $("#detNmkel").val(exp[7]);
-        $("#detStatus").val(exp[8]);
+    // $("#detStatus").val(exp[8]);
+      if (exp[8] == '1') {
+            $("#detStatus").val('Aktif');
+    } else {
+        $("#detStatus").val('Non Aktif');
+        }
     }
 
 function editablePetugas(param) {

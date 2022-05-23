@@ -3,63 +3,132 @@ include_once("koneksi.php");
 ?>
 <div class="form-group">
     <br>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-default">Laporan</button>
-                <!-- Modal Content -->
-                <div class="card">
-                    <div class="card-header">
-
-                        <h5 class="card-title">Data Pelaporan</h5>
+    <?php
+    switch ($data_level) {
+        case '0':
+    ?>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-default">Laporan</button>
+                        <!-- Modal Content -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Data Pelaporan</h5>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Petugas</th>
+                                            <th>Penugasan</th>
+                                            <th>Jadwal</th>
+                                            <th>Tanggal</th>
+                                            <th>Laporan</th>
+                                            <th>Dikirim</th>
+                                            <th>Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $a = getTugas();
+                                        $no = 1;
+                                        foreach ($a as $key => $data) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $no; ?></td>
+                                                <td><?= $data['nama'] ?></td>
+                                                <td><?= $data['catatan_tugas'] ?></td>
+                                                <td><?= $data['nm_jadwal'] ?></td>
+                                                <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
+                                                <td><?= $data['catatan'] ?></td>
+                                                <td><?= date('d-m-Y', strtotime($data['submitted'])); ?></td>
+                                                <td>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                                    <a href="?v=pelaporan_aksi&kode=<?php echo $data['id_pelaporan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example" class="table table-striped" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Petugas</th>
-                                    <th>Penugasan</th>
-                                    <th>Jadwal</th>
-                                    <th>Tanggal</th>
-                                    <th>Laporan</th>
-                                    <th>Dikirim</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $a = getTugas();
-                                $no = 1;
-                                foreach ($a as $key => $data) {
-                                ?>
-                                    <tr>
-                                        <td><?php echo $no; ?></td>
-                                        <td><?= $data['nama'] ?></td>
-                                        <td><?= $data['catatan_tugas'] ?></td>
-                                        <td><?= $data['nm_jadwal'] ?></td>
-                                        <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
-                                        <td><?= $data['catatan'] ?></td>
-                                        <td><?= date('d-m-Y', strtotime($data['submitted'])); ?></td>
-                                        <td>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                            <a href="?v=pelaporan_aksi&kode=<?php echo $data['id_pelaporan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                    </div>
-                    <!-- /.card-body -->
+                    <!-- /.col -->
                 </div>
-                <!-- /.card -->
+                <!-- /.row -->
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-    </div>
+        <?php
+            break;
+
+        case '1':
+        ?>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-default">Laporan</button>
+                        <!-- Modal Content -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Data Pelaporan Individu</h5>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Petugas</th>
+                                            <th>Penugasan</th>
+                                            <th>Jadwal</th>
+                                            <th>Tanggal</th>
+                                            <th>Laporan</th>
+                                            <th>Dikirim</th>
+                                            <th>Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $a = getTugas();
+                                        $no = 1;
+                                        foreach ($a as $key => $data) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $no; ?></td>
+                                                <td><?= $data['nama'] ?></td>
+                                                <td><?= $data['catatan_tugas'] ?></td>
+                                                <td><?= $data['nm_jadwal'] ?></td>
+                                                <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
+                                                <td><?= $data['catatan'] ?></td>
+                                                <td><?= date('d-m-Y', strtotime($data['submitted'])); ?></td>
+                                                <td>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                                    <a href="?v=pelaporan_aksi&kode=<?php echo $data['id_pelaporan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+    <?php
+            break;
+    }
+    ?>
 
     </body>
 

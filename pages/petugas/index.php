@@ -1,5 +1,6 @@
 <?php
 include_once("koneksi.php");
+$getkode = maxKodePetugas();
 ?>
 <div class="form-group">
     <br>
@@ -50,9 +51,9 @@ include_once("koneksi.php");
                                         <td><?= $data['bagian'] ?></td>
                                         <td><?= $data['nama_kelompok'] ?></td>
                                         <td>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#detail" onclick="detPetugas(this)" data-id="<?php echo $data['id_petugas'] . "~" . $data['kode_petugas'] . "~" . $data['nama'] . "~" . $data['is_gender'] . "~" . $data['alamat'] . "~" . $data['no_hp'] . "~" . $data['bagian'] . "~" . $data['nama_kelompok'] . "~" . $data['status']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPetugas" onclick="editablePetugas(this)" data-id="<?php echo $data['id_petugas'] . "~" . $data['kode_petugas'] . "~" . $data['nama'] . "~" . $data['is_gender'] . "~" . $data['alamat'] . "~" . $data['no_hp'] . "~" . $data['bagian'] . "~" . $data['id_kelompok'] . "~" . $data['status']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                            <a href="?v=rute_aksi&kode=<?php echo $data['id_kelompok']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#detail" onclick="detPetugas(this)" data-id="<?php echo $data['id_petugas'] . "~" . $data['kode_petugas'] . "~" . $data['nama'] . "~" . $data['is_gender'] . "~" . $data['alamat'] . "~" . $data['no_hp'] . "~" . $data['bagian'] . "~" . $data['nama_kelompok'] . "~" . $data['status']  ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editpetugas" onclick="editablePetugas(this)" data-id="<?php echo $data['id_petugas'] . "~" . $data['kode_petugas'] . "~" . $data['nama'] . "~" . $data['is_gender'] . "~" . $data['alamat'] . "~" . $data['no_hp'] . "~" . $data['bagian'] . "~" . $data['id_kelompok'] . "~" . $data['status']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                            <a href="?v=petugas_aksi&kode=<?php echo $data['id_petugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php
@@ -80,33 +81,59 @@ include_once("koneksi.php");
                     <h2 class="h6 modal-title">Tambah Data Petugas</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="?v=kelompok_aksi" method="post" enctype="multipart/form-data">
+                <form action="?v=petugas_aksi" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Kelompok</label>
-                            <input type="text" name="kelompok" id="" class="form-control" placeholder="Nama Kelompok" required>
+                            <label for="">Kode Petugas</label>
+                            <input type="text" name="kode" value="<?= $getkode ?>" class="form-control" readonly>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="">Wilayah</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Pilih</option>
-                                        <?php
-                                        $a = wilayah();
-                                        foreach ($a as $key => $value) {
-                                            echo "<option value='" . $value["id_wilayah"] . "'>" . $value["nama"] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                    <label for="">Nama</label>
+                                    <input type="text" name="nama" id="" class="form-control" placeholder="Nama Petugas">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="">Jumlah Anggota</label>
-                                    <input type="text" name="jumlah" id="" class="form-control" placeholder="Jumlah Anggota Kelompok">
+                                    <label for="">Gender</label>
+                                    <select name="gender" id="" class="form-control">
+                                        <option selected>Pilih</option>
+                                        <option value="1">Pria</option>
+                                        <option value="0">Wanita</option>
+                                    </select>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Alamat</label>
+                            <input type="text" name="alamat" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">No Handphone</label>
+                            <input type="text" name="nohp" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Bagian</label>
+                            <input type="text" name="bagian" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Regu Kelompok</label>
+                            <select name="kelompok" name="kelompok" class="form-control" id="">
+                                <option selected>Pilih</option>
+                                <option value="0">Non Kelompok</option>
+                                <?php
+                                $a = kelompok();
+                                foreach ($a as $key => $value) {
+                                    echo "<option value='" . $value["id_kelompok"] . "'>" . $value["nama_kelompok"] . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
 
                     </div>
@@ -195,20 +222,20 @@ include_once("koneksi.php");
         </div>
     </div>
 
-    <div class="modal fade" id="editKelompok" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal fade" id="editpetugas" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="h6 modal-title">Edit Data Kelompok</h2>
+                    <h2 class="h6 modal-title">Edit Data Petugas</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <form action="?v=kelompok_aksi" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                <form action="?v=petugas_aksi" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">No Induk Petugas</label>
-                                <input type="text" name="id" id="editIdPetugas" class="form-control">
+                                <label for="">Kode Petugas</label>
+                                <input type="hidden" name="id" id="editIdPetugas" class="form-control">
                                 <input type="text" name="kode" id="editKode" class="form-control" readonly>
                             </div>
                         </div>
@@ -280,6 +307,7 @@ include_once("koneksi.php");
                             </div>
                         </div>
                     </div>
+                    <br>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
