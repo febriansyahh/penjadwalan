@@ -95,11 +95,11 @@ error_reporting(E_ALL ^ E_NOTICE);
       <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
         <div class="d-flex align-items-center">
           <div class="avatar-lg me-4">
-            <img src="assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white" alt="Bonnie Green">
+            <img src="assets/img/team/icon.png" class="card-img-top rounded-circle border-white" alt="Bonnie Green">
           </div>
           <div class="d-block">
             <h2 class="h5 mb-3"><?= $data_nama ?></h2>
-            <a href="sign-in.php" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
+            <a href="logout.php" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
               <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
               </svg>
@@ -288,7 +288,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             </li>
 
             <li class="nav-item">
-              <a href="pages/upgrade-to-pro.html" class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
+              <a href="#" class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
                 <span class="sidebar-icon d-inline-flex align-items-center justify-content-center">
                 </span>
                 <span><b>Support By IT</b></span>
@@ -388,7 +388,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             <li class="nav-item dropdown ms-lg-3">
               <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="media d-flex align-items-center">
-                  <img class="avatar rounded-circle" alt="Image placeholder" src="assets/img/team/profile-picture-3.jpg">
+                  <img class="avatar rounded-circle" alt="Image placeholder" src="assets/img/team/icon.png">
                   <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <span class="mb-0 font-small fw-bold text-gray-900"><?= $data_nama ?></span>
                   </div>
