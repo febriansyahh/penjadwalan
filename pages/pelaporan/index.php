@@ -33,13 +33,13 @@ include_once("koneksi.php");
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $a = getTugas();
+                                        $a = getPelaporan();
                                         $no = 1;
                                         foreach ($a as $key => $data) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?= $data['nama'] ?></td>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?= $data['petugas'] ?></td>
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['nm_jadwal'] ?></td>
                                                 <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
@@ -47,6 +47,17 @@ include_once("koneksi.php");
                                                 <td><?= date('d-m-Y', strtotime($data['submitted'])); ?></td>
                                                 <td>
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                                    <?php
+                                                    if ($data['status'] == '0') {
+                                                    ?>
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmPelaporan" onclick="confirmPelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] . "~" . $data['petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-secondary btn-sm"><i class="fas fa-check"></i> Konfirmasi</a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-check"></i> <b>Terkonfirmasi</b></a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <a href="?v=pelaporan_aksi&kode=<?php echo $data['id_pelaporan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                                                 </td>
                                             </tr>
@@ -94,13 +105,13 @@ include_once("koneksi.php");
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $a = getTugas();
+                                        $a = getPelaporan();
                                         $no = 1;
                                         foreach ($a as $key => $data) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?= $data['nama'] ?></td>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?= $data['petugas'] ?></td>
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['nm_jadwal'] ?></td>
                                                 <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
@@ -184,38 +195,79 @@ include_once("koneksi.php");
                     <h2 class="h6 modal-title">Edit Tugas</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <form action="?v=pelaporan_aksi" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Tugas</label>
+                            <input type="hidden" name="id" class="form-control" id="editIdPelaporan">
+                            <input type="hidden" name="petugas" class="form-control" id="editPetugas">
+                            <select class="form-select" name="tugas" id="editTugas" aria-label="Default select example">
+                                <option selected>Pilih</option>
+                                <?php
+                                $a = tugas();
+                                foreach ($a as $key => $value) {
+                                    echo "<option value='" . $value["id_tugas"] . "'>" . $value["catatan_tugas"] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
 
-                <form action="?v=pelaporan_aksi" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="">Tugas</label>
-                        <input type="hidden" name="id" class="form-control" id="editIdPelaporan">
-                        <input type="hidden" name="petugas" class="form-control" id="editPetugas">
-                        <select class="form-select" name="tugas" id="editTugas" aria-label="Default select example">
-                            <option selected>Pilih</option>
-                            <?php
-                            $a = tugas();
-                            foreach ($a as $key => $value) {
-                                echo "<option value='" . $value["id_tugas"] . "'>" . $value["catatan_tugas"] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="">Catatan</label><br>
+                            <textarea name="catatan" class="form-control" id="editCatatan" rows="3" placeholder="Masukkan catatan pengerjaan tugas"></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="">Catatan</label><br>
-                        <textarea name="catatan" class="form-control" id="editCatatan" rows="3" placeholder="Masukkan catatan pengerjaan tugas"></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="">File Tugas</label><br>
+                            <input type="file" name="fileUbah" id="editFile" class="form-control">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="">File Tugas</label><br>
-                        <input type="file" name="fileUbah" id="editFile" class="form-control">
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" name="btnUbah" class="btn btn-secondary">Ubah</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" name="btnUbah" class="btn btn-secondary">Ubah</button>
-                    </div>
-                </form>
+    <div class="modal" id="confirmPelaporan" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Konfirmasi Pelaporan Tugas</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="?v=pelaporan_aksi" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Tugas</label>
+                            <input type="hidden" name="id" class="form-control" id="cnfrmId">
+                            <input type="text" name="tugas" class="form-control" id="cnfrmCttnTugas" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Petugas</label>
+                            <input type="text" name="tugas" class="form-control" id="cnfrmNama" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Catatan</label><br>
+                            <textarea name="catatan" class="form-control" id="cnfrmCatatan" rows="3" placeholder="Masukkan catatan pengerjaan tugas" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">File Pelaporan</label><br>
+                            <div id="showFile"></div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" name="btnConfirm" class="btn btn-secondary">Konfirmasi Laporan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

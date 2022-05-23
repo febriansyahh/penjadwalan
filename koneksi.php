@@ -519,23 +519,23 @@ function upload_file($namePost, $codePetugas)
     $query = mysqli_query($con, $getkode);
     $row = mysqli_fetch_row($query);
     $kode = $row[0];
-
-    $ekstensi_diperbolehkan  = array('jpg', 'png', 'jpeg');
+    $ekstensi_diperbolehkan  = array('jpg', 'png', 'jpeg', 'pdf');
     $date = date('Y-m-d');
-    $named = str_replace(' ', '_', $kode);
+    $named = str_replace('-', '', $kode);
+    
     $nama = $_FILES[$namePost]['name'];
     $x = explode('.', $nama);
+    
     $ekstensi = strtolower(end($x));
     $namas = 'Pelaporan_' . $named . "_" . $date . "." . $ekstensi;
+    
     $ukuran = $_FILES[$namePost]['size'];
     $file_tmp = $_FILES[$namePost]['tmp_name'];
 
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         if ($ukuran < 41943040) {
             $destination_path = getcwd() . DIRECTORY_SEPARATOR . 'file_data\pelaporan' . '/';
-
             $target_path = $destination_path . $namas;
-
             @move_uploaded_file($file_tmp, $target_path);
             return $namas;
         } else {
@@ -748,6 +748,30 @@ function deleteUser($id)
     } else {
         echo "<script>alert('Hapus Gagal')</script>";
         echo "<meta http-equiv='refresh' content='0; url=index.php?v=user'>";
+    }
+}
+
+function getPelaporan()
+{
+    global $con;
+    $sql = "SELECT a.*, d.nama as petugas, b.catatan_tugas, b.keterangan, c.nm_jadwal, c.tanggal FROM pelaporan a, tugas b, jadwal c, petugas d WHERE a.id_tugas=b.id_tugas AND a.id_petugas=d.id_petugas AND b.id_jadwal=c.id_jadwal ";
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function confirmPelaporan($id)
+{
+    global $con;
+
+    $sql = "UPDATE `pelaporan` SET `status` = '1' WHERE `id_pelaporan` = '$id' ";
+    $query = mysqli_query($con, $sql);
+
+    if ($query) {
+        echo "<script>alert('Konfirmasi Pelaporan Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    } else {
+        echo "<script>alert('Konfirmasi Pelaporan Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
     }
 }
 

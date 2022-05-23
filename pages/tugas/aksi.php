@@ -4,9 +4,7 @@ include_once("__DIR__ .  ../../koneksi.php");
 if (isset($_POST['btnSimpan'])) {
     insertTugas();
 } elseif (isset($_POST['btnClear'])) {
-    $a = $_FILES["file"];
-    $b = $_POST["petugas"];
-    insertPelaporan(upload_file($a, $b));
+    insertPelaporan(upload_file('file', $_POST["petugas"]));
 } elseif (isset($_POST['btnUbah'])) {
     updateTugas();
 } else {

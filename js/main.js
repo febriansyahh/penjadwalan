@@ -158,6 +158,33 @@ function selesaikanTugas(param) {
       $("#cleartugas").val(exp[2]);
     }
 
+function confirmPelaporan(param) {
+    let data = $(param).data("id");
+    let exp = data.split("~");
+    let type = exp[4].split(".");
+    
+    var base_url = window.location.origin;
+    
+      console.log(data);
+    console.log(exp[2]);
+    console.log(base_url + '/penjadwalan');
+
+      $("#cnfrmId").val(exp[0]);
+      $("#cnfrmIdTugas").val(exp[1]);
+      $("#cnfrmIdPetugas").val(exp[2]);
+      $("#cnfrmCatatan").val(exp[3]);
+      $("#cnfrmFile").val(exp[4]);
+      $("#cnfrmSubmit").val(exp[5]);
+      $("#cnfrmNama").val(exp[6]);
+      $("#cnfrmCttnTugas").val(exp[7]);
+    
+    if (type[1] != 'pdf') {
+		$('#showFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
+	} else {
+		$('#showFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
+	}
+    }
+
 function getProvinsi() {
 //     var settings = {
 //   "url": "http://dev.farizdotid.com/api/daerahindonesia/provinsi",
