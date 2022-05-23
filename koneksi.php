@@ -439,7 +439,7 @@ function tugas()
 function getTugas()
 {
     global $con;
-    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, petugas b, wilayah c, jadwal d WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal ORDER BY a.id_tugas DESC";
+    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, petugas b, wilayah c, jadwal d WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC";
     $query = mysqli_query($con, $sql);
     return $query;
 }
@@ -447,7 +447,7 @@ function getTugas()
 function getTugasme($id)
 {
     global $con;
-    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, petugas b, wilayah c, jadwal d WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND a.id_petugas='$id' ORDER BY a.id_tugas DESC ";
+    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, petugas b, wilayah c, jadwal d WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
     $query = mysqli_query($con, $sql);
     return $query;
 }

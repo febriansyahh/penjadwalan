@@ -129,7 +129,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                 <span class="mt-1 ms-1 sidebar-text">Penjadwalan</span>
               </a>
             </li>
-            <li class="nav-item  active ">
+            <li class="nav-item active">
               <a href="?v=dashboard" class="nav-link">
                 <span class="sidebar-icon">
                   <i class="fas fa-home-lg-alt"></i>
