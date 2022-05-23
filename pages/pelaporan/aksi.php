@@ -7,9 +7,11 @@ if (isset($_POST['btnSimpan'])) {
     $b= $_POST["petugas"];
     insertPelaporan(upload_file($a, $b));
 } elseif (isset($_POST['btnUbah'])) {
-    updateTugas();
+    $a = $_FILES["fileUbah"];
+    $b = $_POST["petugas"];
+    updatePelaporan(upload_file($a,$b));
 } else {
     if (isset($_GET['kode'])) {
-        deleteTugas($_GET['kode']);
+        deletePelaporan($_GET['kode']);
     }
 }

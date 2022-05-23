@@ -455,27 +455,6 @@ function deleteTugas($id)
     }
 }
 
-function insertPelaporan($upload)
-{
-    global $con;
-    $date = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO `pelaporan`(`id_tugas`, `id_petugas`, `catatan`, `file`, `submitted`) VALUES(
-                '" . $_POST['tugas'] . "',
-                '" . $_POST['petugas'] . "',
-                '" . $_POST['catatan'] . "',
-                '" . $upload . "',
-                '" . $date . "')";
-    $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
-
-    if ($query_insert) {
-        echo "<script>alert('Simpan Berhasil')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
-    } else {
-        echo "<script>alert('Simpan Gagal')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
-    }
-}
-
 function upload_file($namePost, $codePetugas)
 {
     global $con;
@@ -508,6 +487,86 @@ function upload_file($namePost, $codePetugas)
         }
     } else {
         return;
+    }
+}
+
+function insertPelaporan($upload)
+{
+    global $con;
+    $date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO `pelaporan`(`id_tugas`, `id_petugas`, `catatan`, `file`, `submitted`) VALUES(
+                '" . $_POST['tugas'] . "',
+                '" . $_POST['petugas'] . "',
+                '" . $_POST['catatan'] . "',
+                '" . $upload . "',
+                '" . $date . "')";
+    $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+    if ($query_insert) {
+        echo "<script>alert('Simpan Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    } else {
+        echo "<script>alert('Simpan Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    }
+}
+
+
+function updatePelaporan($upload)
+{
+    global $con;
+    $id = $_POST['id'];
+    $cekData = "SELECT `id_pelaporan`, `file` FROM `pelaporan` WHERE `id_pelaporan` = '$id'";
+    $query = mysqli_query($con, $cekData);
+    $row = mysqli_fetch_row($query);
+    $id = $row[0];
+    $file = $row[1];
+
+    if($_FILES["fileUbah"] == NULL)
+    {
+        $sql_ubah = "UPDATE pelaporan SET
+        id_tugas ='" . $_POST['tugas'] . "',
+        id_petugas ='" . $_POST['petugas'] . "',
+        catatan ='" . $_POST['catatan'] . "',
+        WHERE id_pelaporan ='" . $_POST['id'] . "'";
+        $query_ubah = mysqli_query($con, $sql_ubah);
+    }else{
+        if($upload != $file)
+        {
+            unlink('file_data/pelaporan/' . $file);
+
+            $sql_ubah = "UPDATE pelaporan SET
+            id_tugas ='" . $_POST['tugas'] . "',
+            id_petugas ='" . $_POST['petugas'] . "',
+            catatan ='" . $_POST['catatan'] . "',
+            file ='" . $upload . "',
+            WHERE id_pelaporan ='" . $_POST['id'] . "'";
+            $query_ubah = mysqli_query($con, $sql_ubah);
+        }
+    }
+
+    if ($query_ubah) {
+        echo "<script>alert('Ubah Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    } else {
+        echo "<script>alert('Ubah Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    }
+}
+
+function deletePelaporan($id)
+{
+    global $con;
+
+    $sql = "DELETE FROM pelaporan WHERE id_pelaporan = '$id' ";
+    $query_delete = mysqli_query($con, $sql);
+
+    if ($query_delete) {
+        echo "<script>alert('Hapus Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
+    } else {
+        echo "<script>alert('Hapus Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=index.php?v=pelaporan'>";
     }
 }
 
