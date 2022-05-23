@@ -46,7 +46,7 @@ include_once("koneksi.php");
                                                 <td><?= $data['catatan'] ?></td>
                                                 <td><?= date('d-m-Y', strtotime($data['submitted'])); ?></td>
                                                 <td>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPelaporan" onclick="editablePelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a> -->
                                                     <?php
                                                     if ($data['status'] == '0') {
                                                     ?>

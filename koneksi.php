@@ -52,6 +52,39 @@ function notifikasi()
     return $query;
 }
 
+function countPetugas()
+{
+    global $con;
+    $sql = "SELECT COUNT(`id_petugas`) as petugas FROM `petugas` WHERE `status` = '1' ";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+    $petugas = $rows[0];
+
+    return $petugas;
+}
+
+function countTugas()
+{
+    global $con;
+    $month = date('m');
+    $sql = "SELECT COUNT(id_tugas) AS tugas, MONTHNAME(NOW()) AS bulan FROM `tugas` WHERE MONTH(submitted) = '$month' ";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+
+    return $rows;
+}
+
+function countPelaporan()
+{
+    global $con;
+    $month = date('m');
+    $sql = "SELECT COUNT(`id_pelaporan`) as pelaporan, MONTHNAME(NOW()) AS bulan FROM `pelaporan` WHERE MONTH(submitted) = '$month' ";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+
+    return $rows;
+}
+
 function rute()
 {
     global $con;
