@@ -6,9 +6,11 @@ include_once("koneksi.php");
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                <a href="pages/report/r_jadwal.php" target="_blank" class="btn btn-secondary btn-secondary-800 mb-3"><b>Cetak Data</b></a>
+
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Rekap Data Jadwal</h5>
+                        <h6 class="card-title">Rekap Data Jadwal</h6>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
