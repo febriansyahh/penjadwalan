@@ -44,9 +44,9 @@ error_reporting(E_ALL ^ E_NOTICE);
   <meta property="twitter:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/admin.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/admin.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/admin.png">
   <link rel="manifest" href="assets/img/favicon/site.webmanifest">
   <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
   <meta name="msapplication-TileColor" content="#ffffff">
@@ -119,7 +119,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             <li class="nav-item">
               <a href="index.php" class="nav-link d-flex align-items-center">
                 <span class="sidebar-icon">
-                  <img src="assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                  <img src="assets/img/admin.png" height="30" width="30" alt="Volt Logo">
                 </span>
                 <span class="mt-1 ms-1 sidebar-text">Penjadwalan</span>
               </a>
