@@ -10,8 +10,7 @@ include_once("koneksi.php");
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-default">Laporan</button>
-                        <!-- Modal Content -->
+                        <!-- <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-default">Laporan</button> -->
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Data Pelaporan</h5>

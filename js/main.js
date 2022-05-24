@@ -2,6 +2,16 @@ $(document).ready(function () {
     $('#example').DataTable();
 });
 
+function myProfile(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+      console.log(data);
+      $("#dataID").val(exp[0]);
+      $("#dataUsername").val(exp[1]);
+      $("#dataNama").val(exp[2]);
+      $("#dataIdUser").val(exp[3]);
+}
+    
 function editableRute(param) {
   let data = $(param).data("id");
   let exp = data.split("~");
@@ -157,6 +167,7 @@ function selesaikanTugas(param) {
       $("#clearIdPetugas").val(exp[1]);
       $("#cleartugas").val(exp[2]);
     }
+
 
 function confirmPelaporan(param) {
     let data = $(param).data("id");

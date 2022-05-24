@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once("koneksi.php");
 if (isset($_SESSION['ses_username']) == "") {
   echo "<meta http-equiv='refresh' content='0;url=sign-in.php'>";
@@ -10,11 +11,7 @@ if (isset($_SESSION['ses_username']) == "") {
   $data_idUser = $_SESSION["ses_idUser"];
   $data_level = $_SESSION["ses_level"];
 }
-// session_destroy();
 
-// if(isset($_POST["logout"])){
-
-// }
 error_reporting();
 error_reporting(E_ALL ^ E_NOTICE);
 ?>
@@ -75,8 +72,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 </head>
 
 <body>
-
-  <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 
   <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
@@ -343,7 +338,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                           <div class="row align-items-center">
                             <div class="col ps-0 ms-2">
                               <div class="d-flex justify-content-between align-items-center">
-                                  <h4 class="text-center h6 mb-0 text-small">Tidak ada laporan yang masuk</h4>
+                                <h4 class="text-center h6 mb-0 text-small">Tidak ada laporan yang masuk</h4>
                               </div>
                             </div>
                           </div>
@@ -395,17 +390,12 @@ error_reporting(E_ALL ^ E_NOTICE);
                 </div>
               </a>
               <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                <a class="dropdown-item d-flex align-items-center" href="#">
+
+                <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#myprofile" onclick="myProfile(this)" data-id="<?php echo $data_id . "~" . $data_username . "~" . $data_nama . "~" . $data_idUser ?>">
                   <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
                   </svg>
                   My Profile
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-                  </svg>
-                  Settings
                 </a>
 
                 <div role="separator" class="dropdown-divider my-1"></div>
@@ -515,12 +505,8 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "logout.php";
               break;
 
-              // case 'report_transaksi' :
-              //   include "pages/v_report/coba.php";
-              //   break;
-
             default:
-              echo "<center><h3 style='font-family: Poppins'> Maaf Laman yang anda tuju tidak tersedia !</h3></center>";
+              include "pages/404.php";
               break;
           }
         } else {
@@ -583,3 +569,29 @@ error_reporting(E_ALL ^ E_NOTICE);
 </body>
 
 </html>
+
+<div class="modal" id="myprofile" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="h6 modal-title">Profile Saya</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="">Nama</label>
+          <input type="text" name="tugas" class="form-control" id="dataNama" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="">Username</label>
+          <input type="text" name="tugas" class="form-control" id="dataUsername" readonly>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
