@@ -487,7 +487,6 @@ error_reporting(E_ALL ^ E_NOTICE);
                       </a>
                     </div>
                   </div>
-
               <?php
                   break;
               }
