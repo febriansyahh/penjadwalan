@@ -43,10 +43,57 @@ function notif()
     return $idpelaporan;
 }
 
+function notifTugas() 
+{
+    global $con;
+    
+    $id = $_SESSION["ses_idPetugas"];
+    $sql = "SELECT `id_tugas` FROM `tugas` WHERE `id_tugas` NOT IN (SELECT `id_tugas` FROM `pelaporan` WHERE `id_petugas` = '$id') AND `id_petugas` = '$id'";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+    $idtugas = $rows[0];
+
+    return $idtugas;
+}
+
+function countNotifikasi()
+{
+    global $con;
+    $sql = "SELECT a.id_pelaporan FROM pelaporan a, petugas b WHERE a.id_petugas=b.id_petugas AND a.status='0'";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+    $id = $rows[0];
+
+    return $id;
+}
+
 function notifikasi()
 {
     global $con;
     $sql = "SELECT a.*, b.nama FROM pelaporan a, petugas b WHERE a.id_petugas=b.id_petugas AND a.status='0'";
+    $query = mysqli_query($con, $sql);
+
+    return $query;
+}
+
+function countNotTugas()
+{
+    global $con;
+    $id = $_SESSION["ses_idPetugas"];
+    $sql = "SELECT a.id_tugas FROM tugas a, jadwal b, wilayah c WHERE a.id_jadwal=b.id_jadwal AND a.id_wilayah=c.id_wilayah AND a.id_petugas='$id'";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_row($query);
+    $id = $rows[0];
+
+    return $id;
+}
+
+function notifikasiTugas()
+{
+    global $con;
+    $id = $_SESSION["ses_idPetugas"];
+    $sql = "SELECT a.*, b.nm_jadwal,b.tanggal, b.catatan, c.nama, c.area FROM tugas a, jadwal b, wilayah c WHERE a.id_jadwal=b.id_jadwal AND a.id_wilayah=c.id_wilayah AND a.id_petugas='$id'";
+    
     $query = mysqli_query($con, $sql);
 
     return $query;
