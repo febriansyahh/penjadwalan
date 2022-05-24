@@ -96,7 +96,7 @@
 
                  <div class="form-group">
                      <div class="card mt-4">
-                         <h5 class="text-center mt-4 mb-4"><b>SELAMAT DATANG DI<br> SISTEM INFORMASI PENJADWALAN</b></h5>
+                         <h5 class="text-center mt-4 mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;"><b>SELAMAT DATANG DI<br> SISTEM INFORMASI PENJADWALAN</b></h5>
                          <center>
                              <img src="assets/img/admin.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
                          </center>
@@ -109,7 +109,7 @@
                 ?>
                  <div class="form-group">
                      <div class="card mt-4">
-                         <h5 class="text-center mt-4 mb-4"><b>SELAMAT DATANG DI<br> SISTEM INFORMASI PENJADWALAN</b></h5>
+                         <h5 class="text-center mt-4 mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;"><b>SELAMAT DATANG DI<br> SISTEM INFORMASI PENJADWALAN</b></h5>
                          <center>
                              <img src="assets/img/layanan.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
                          </center>
