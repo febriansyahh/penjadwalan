@@ -186,17 +186,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link d-flex justify-content-between">
-                <span>
-                  <span class="sidebar-icon">
-                    <i class="fas fa-file-alt"></i>
-                  </span>
-                  <span class="sidebar-text">Laporan</span>
-                </span>
-
-              </a>
-            </li>
 
             <li class="nav-item ">
               <a href="?v=pelaporan" class="nav-link">
@@ -205,6 +194,46 @@ error_reporting(E_ALL ^ E_NOTICE);
                 </span>
                 <span class="sidebar-text">Pelaporan</span>
               </a>
+            </li>
+
+            <li class="nav-item">
+              <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-components">
+                <span>
+                  <span class="sidebar-icon">
+                    <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span class="sidebar-text">Laporan</span>
+                </span>
+                <span class="link-arrow">
+                  <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </span>
+              <div class="multi-level collapse " role="list" id="submenu-components" aria-expanded="false">
+                <ul class="flex-column nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="?v=r_pelaporan">
+                      <span class="sidebar-text">Pelaporan</span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="?v=r_tugas">
+                      <span class="sidebar-text">Tugas</span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="?v=r_rute">
+                      <span class="sidebar-text">Rute</span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="?v=r_jadwal">
+                      <span class="sidebar-text">Jadwal</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
 
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
@@ -229,6 +258,7 @@ error_reporting(E_ALL ^ E_NOTICE);
               </a>
             </li>
           </ul>
+
         <?php
           break;
         case '1':
@@ -294,8 +324,6 @@ error_reporting(E_ALL ^ E_NOTICE);
           break;
       }
       ?>
-
-
     </div>
   </nav>
 
@@ -368,8 +396,6 @@ error_reporting(E_ALL ^ E_NOTICE);
                       <?php
                       }
                       ?>
-
-
                       <a href="?v=pelaporan" class="dropdown-item text-center fw-bold rounded-bottom py-3">
                         <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
@@ -489,16 +515,20 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "pages/user/aksi.php";
               break;
 
-            case 'report_jadwal':
-              include "pages/v_report/jadwal.php";
+            case 'r_jadwal':
+              include "pages/report/jadwal.php";
               break;
 
-            case 'report_tugas':
-              include "pages/v_report/tugas.php";
+            case 'r_tugas':
+              include "pages/report/tugas.php";
               break;
 
-            case 'report_rute':
-              include "pages/v_report/rute.php";
+            case 'r_rute':
+              include "pages/report/rute.php";
+              break;
+
+            case 'r_pelaporan':
+              include "pages/report/pelaporan.php";
               break;
 
             case 'logout':
