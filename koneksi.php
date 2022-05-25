@@ -345,9 +345,9 @@ function updatePetugas()
         nama='" . $_POST['nama'] . "',
         is_gender='" . $_POST['gender'] . "',
         alamat='" . $_POST['alamat'] . "',
-        no_hp='" . $_POST['no_hp'] . "',
+        no_hp='" . $_POST['nohp'] . "',
         bagian='" . $_POST['bagian'] . "',
-        id_kelompok='" . $_POST['kelompok'] . "'
+        id_kelompok='" . $_POST['kelompok'] . "',
         status='" . $_POST['status'] . "'
         WHERE id_petugas='" . $_POST['id'] . "'";
     $query_ubah = mysqli_query($con, $sql_ubah);
@@ -652,7 +652,7 @@ function insertPelaporan($upload)
     global $con;
     $date = date("Y-m-d H:i:s");
     $sql = "INSERT INTO `pelaporan`(`id_tugas`, `id_petugas`, `catatan`, `file`, `submitted`) VALUES(
-                '" . $_POST['tugas'] . "',
+                '" . $_POST['idTugas'] . "',
                 '" . $_POST['petugas'] . "',
                 '" . $_POST['catatan'] . "',
                 '" . $upload . "',

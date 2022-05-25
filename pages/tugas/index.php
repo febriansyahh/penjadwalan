@@ -47,8 +47,8 @@ include_once("koneksi.php");
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['keterangan'] ?></td>
                                                 <td>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                                    <a href="?v=tugas_aksi&kode=<?php echo $data['id_tugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="?v=tugas_aksi&kode=<?php echo $data['id_tugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -220,9 +220,9 @@ include_once("koneksi.php");
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Tugas</label>
-                            <input type="hidden" id="clearId" name="id" class="form-control">
+                            <input type="hidden" id="clearId" name="idTugas" class="form-control">
                             <input type="hidden" value="<?= $data_id ?>" name="petugas" class="form-control">
-                            <input type="text" readonly id="cleartugas" name="id" class="form-control">
+                            <input type="text" readonly id="cleartugas" name="tugas" class="form-control">
                         </div>
 
                         <div class="form-group">
