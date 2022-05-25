@@ -196,6 +196,34 @@ function confirmPelaporan(param) {
 	}
     }
 
+
+function detailPelaporan(param) {
+    let data = $(param).data("id");
+    let exp = data.split("~");
+    let type = exp[4].split(".");
+    
+    var base_url = window.location.origin;
+    
+      console.log(data);
+    console.log(exp[2]);
+    console.log(base_url + '/penjadwalan');
+
+      $("#detailId").val(exp[0]);
+      $("#detailIdTugas").val(exp[1]);
+      $("#detailIdPetugas").val(exp[2]);
+      $("#detailCatatan").val(exp[3]);
+      $("#detailFile").val(exp[4]);
+      $("#detailSubmit").val(exp[5]);
+      $("#detailNama").val(exp[6]);
+      $("#detailCttnTugas").val(exp[7]);
+    
+    if (type[1] != 'pdf') {
+		$('#detailFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
+	} else {
+		$('#detailFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
+	}
+    }
+
 function getProvinsi() {
 //     var settings = {
 //   "url": "http://dev.farizdotid.com/api/daerahindonesia/provinsi",

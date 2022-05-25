@@ -436,7 +436,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                   <?php
                   }
                   ?>
-                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-center mt-2 py-0">
+                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-center mt-2 py-0" style="margin-left: 10px;">
                     <div class="list-group list-group-flush">
                       <a href="#" class="text-center text-primary fw-bold border-bottom border-light py-3">Notifications</a>
                       <?php

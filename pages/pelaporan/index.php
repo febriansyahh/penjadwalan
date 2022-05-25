@@ -53,7 +53,7 @@ include_once("koneksi.php");
                                                     <?php
                                                     } else {
                                                     ?>
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-check"></i> <b>Terkonfirmasi</b></a>
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#detPelaporan" onclick="detailPelaporan(this)" data-id="<?php echo $data['id_pelaporan'] . "~" . $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan'] . "~" . $data['file'] . "~" . $data['submitted'] . "~" . $data['petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-secondary btn-sm"><i class="fas fa-check"></i> Terkonfirmasi</a>
                                                     <?php
                                                     }
                                                     ?>
@@ -142,8 +142,8 @@ include_once("koneksi.php");
 
     </body>
 
-
     </html>
+
     <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -264,6 +264,44 @@ include_once("koneksi.php");
                         <div class="modal-footer">
                             <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" name="btnConfirm" class="btn btn-secondary">Konfirmasi Laporan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="detPelaporan" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Detail Pelaporan Tugas</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="?v=pelaporan_aksi" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Tugas</label>
+                            <input type="text" name="tugas" class="form-control" id="detailCttnTugas" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Petugas</label>
+                            <input type="text" name="tugas" class="form-control" id="detailNama" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Catatan</label><br>
+                            <textarea name="catatan" class="form-control" id="detailCatatan" rows="3" placeholder="Masukkan catatan pengerjaan tugas" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">File Pelaporan</label><br>
+                            <div id="detailFile"></div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary text-black-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
                         </div>
                     </form>
                 </div>
