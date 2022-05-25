@@ -253,14 +253,24 @@ function detailPelaporan(param) {
       $("#detailFile").val(exp[4]);
       $("#detailSubmit").val(exp[5]);
       $("#detailNama").val(exp[6]);
-      $("#detailCttnTugas").val(exp[7]);
-    
+  $("#detailCttnTugas").val(exp[7]);
+  let upload_path = 'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4];
+  var check = checkFileExist(upload_path);
+  console.log('AAA');
+
+  if (check == false) {
+    $('#detailFile').html(
+			`<h5><center>Maaf file yang anda tuju tidak tersedia</center></h5>`
+		);
+  } else {
     if (type[1] != 'pdf') {
 		$('#detailFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
 	} else {
 		$('#detailFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
 	}
-    }
+  }
+    
+}
 
 function getProvinsi() {
 //     var settings = {

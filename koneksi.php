@@ -2,8 +2,7 @@
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');
-// define('DB', 'penjadwalan');
-define('DB', 'relasi_penjadwalan');
+define('DB', 'penjadwalan');
 
 define('SITE_ROOT', realpath(dirname(__FILE__)));
 
