@@ -2,6 +2,21 @@ $(document).ready(function () {
     $('#example').DataTable();
 });
 
+
+$("#adm_plp").DataTable({
+    columns: [
+      { width: "5%" }, // No
+      { width: "15%" }, // Petugas
+      { width: "15%" }, // Penugasan
+      { width: "15%" }, // Jadwal
+      { width: "10%" }, // Tanggal 
+      { width: "25%" }, // Laporan
+      { width: "10%" }, // Dikirim
+      { width: "15%" }, // Opsi
+    ],
+  });
+  
+
 function myProfile(param) {
       let data = $(param).data("id");
       let exp = data.split("~");
@@ -10,6 +25,19 @@ function myProfile(param) {
       $("#dataUsername").val(exp[1]);
       $("#dataNama").val(exp[2]);
       $("#dataIdUser").val(exp[3]);
+}
+
+
+function checkFileExist(urlToFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', urlToFile, false);
+    xhr.send();
+     
+    if (xhr.status == "404") {
+        return false;
+    } else {
+        return true;
+    }
 }
     
 function editableRute(param) {
@@ -175,10 +203,9 @@ function confirmPelaporan(param) {
     let type = exp[4].split(".");
     
     var base_url = window.location.origin;
-    
-      console.log(data);
-    console.log(exp[2]);
-    console.log(base_url + '/penjadwalan');
+  let url = base_url + '/penjadwalan/';
+  console.log(url);
+
 
       $("#cnfrmId").val(exp[0]);
       $("#cnfrmIdTugas").val(exp[1]);
@@ -188,13 +215,24 @@ function confirmPelaporan(param) {
       $("#cnfrmSubmit").val(exp[5]);
       $("#cnfrmNama").val(exp[6]);
       $("#cnfrmCttnTugas").val(exp[7]);
-    
-    if (type[1] != 'pdf') {
+  
+  let upload_path = 'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4];
+  var check = checkFileExist(upload_path);
+  console.log('AAA');
+
+  if (check == false) {
+    $('#showFile').html(
+			`<h5><center>Maaf file yang anda tuju tidak tersedia</center></h5>`
+		);
+  } else {
+     if (type[1] != 'pdf') {
 		$('#showFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
-	} else {
-		$('#showFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
-	}
+    } else {
+      $('#showFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
     }
+  }
+   
+}
 
 
 function detailPelaporan(param) {

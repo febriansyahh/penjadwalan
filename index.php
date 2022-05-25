@@ -132,6 +132,22 @@ error_reporting(E_ALL ^ E_NOTICE);
                 <span class="sidebar-text">Dashboard</span>
               </a>
             </li>
+            <li class="nav-item ">
+              <a href="?v=kelompok" class="nav-link">
+                <span class="sidebar-icon">
+                  <i class="fas fa-users"></i>
+                </span>
+                <span class="sidebar-text">Data Kelompok</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a href="?v=petugas" class="nav-link">
+                <span class="sidebar-icon">
+                  <i class="fas fa-user-check"></i>
+                </span>
+                <span class="sidebar-text">Data Petugas</span>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="?v=rute" class="nav-link d-flex justify-content-between">
                 <span>
@@ -149,22 +165,6 @@ error_reporting(E_ALL ^ E_NOTICE);
                   <i class="fas fa-location"></i>
                 </span>
                 <span class="sidebar-text">Wilayah</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="?v=petugas" class="nav-link">
-                <span class="sidebar-icon">
-                  <i class="fas fa-user-check"></i>
-                </span>
-                <span class="sidebar-text">Data Petugas</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="?v=kelompok" class="nav-link">
-                <span class="sidebar-icon">
-                  <i class="fas fa-users"></i>
-                </span>
-                <span class="sidebar-text">Data Kelompok</span>
               </a>
             </li>
             <li class="nav-item ">
