@@ -679,24 +679,24 @@ function updatePelaporan($upload)
     $id = $row[0];
     $file = $row[1];
 
-    if($_FILES["fileUbah"] == NULL)
-    {
+    if ($_FILES["fileUbah"]["name"] == "") {
         $sql_ubah = "UPDATE pelaporan SET
         id_tugas ='" . $_POST['tugas'] . "',
         id_petugas ='" . $_POST['petugas'] . "',
-        catatan ='" . $_POST['catatan'] . "',
+        catatan ='" . $_POST['catatan'] . "'
         WHERE id_pelaporan ='" . $_POST['id'] . "'";
         $query_ubah = mysqli_query($con, $sql_ubah);
-    }else{
-        if($upload != $file)
-        {
+    } else {
+
+        // if($upload != $file)
+        if ($_FILES["fileUbah"]["name"] != "") {
             unlink('file_data/pelaporan/' . $file);
 
             $sql_ubah = "UPDATE pelaporan SET
             id_tugas ='" . $_POST['tugas'] . "',
             id_petugas ='" . $_POST['petugas'] . "',
             catatan ='" . $_POST['catatan'] . "',
-            file ='" . $upload . "',
+            file ='" . $upload . "'
             WHERE id_pelaporan ='" . $_POST['id'] . "'";
             $query_ubah = mysqli_query($con, $sql_ubah);
         }
