@@ -246,29 +246,30 @@ function detailPelaporan(param) {
     console.log(exp[2]);
     console.log(base_url + '/penjadwalan');
 
-      $("#detailId").val(exp[0]);
-      $("#detailIdTugas").val(exp[1]);
-      $("#detailIdPetugas").val(exp[2]);
-      $("#detailCatatan").val(exp[3]);
-      $("#detailFile").val(exp[4]);
-      $("#detailSubmit").val(exp[5]);
-      $("#detailNama").val(exp[6]);
-  $("#detailCttnTugas").val(exp[7]);
-  let upload_path = 'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4];
-  var check = checkFileExist(upload_path);
-  console.log('AAA');
+    $("#detailId").val(exp[0]);
+    $("#detailIdTugas").val(exp[1]);
+    $("#detailIdPetugas").val(exp[2]);
+    $("#detailCatatan").val(exp[3]);
+    $("#detailFile").val(exp[4]);
+    $("#detailSubmit").val(exp[5]);
+    $("#detailNama").val(exp[6]);
+    $("#detailCttnTugas").val(exp[7]);
+  
+    let upload_path = 'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4];
+    var check = checkFileExist(upload_path);
+    console.log('AAA');
 
-  if (check == false) {
-    $('#detailFile').html(
-			`<h5><center>Maaf file yang anda tuju tidak tersedia</center></h5>`
-		);
-  } else {
-    if (type[1] != 'pdf') {
-		$('#detailFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
-	} else {
-		$('#detailFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
-	}
-  }
+    if (check == false) {
+      $('#detailFile').html(
+        `<h5><center>Maaf file yang anda tuju tidak tersedia</center></h5>`
+      );
+    } else {
+      if (type[1] != 'pdf') {
+      $('#detailFile').html(`<img id="blah" src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" width="520px" height="350px" />`);
+    } else {
+      $('#detailFile').html(`<iframe src="${'http://localhost/penjadwalan/file_data/pelaporan/' + exp[4]}" height="520px" width="100%"></iframe>`);
+    }
+    }
     
 }
 
