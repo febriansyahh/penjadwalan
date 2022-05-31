@@ -300,7 +300,7 @@ error_reporting(E_ALL ^ E_NOTICE);
               </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="#" class="nav-link d-flex justify-content-between">
                 <span>
                   <span class="sidebar-icon">
@@ -310,7 +310,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                 </span>
 
               </a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
               <a href="#" class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
