@@ -24,7 +24,7 @@ function LoginUser()
         $_SESSION["ses_idPetugas"] = $data_login['idPetugas'];
         $_SESSION["ses_idUser"] = $data_login['idUser'];
 
-        echo "<script>alert('Login Berhasil')</script>";
+        // echo "<script>alert('Login Berhasil')</script>";
         echo "<meta http-equiv='refresh' content='0; url=index.php'>";
     } else {
         echo "<script>alert('Login Gagal!!')</script>";
@@ -48,6 +48,9 @@ function notifTugas()
     global $con;
     
     $id = $_SESSION["ses_idPetugas"];
+    // menggunakan id_kelompok pada tugas
+    // $sql = "SELECT id_tugas FROM tugas a, kelompok b, petugas c WHERE a.id_kelompok=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas = '$id') AND c.id_petugas = '$id'";
+    
     $sql = "SELECT id_tugas FROM tugas a, kelompok b, petugas c WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas = '$id') AND c.id_petugas = '$id'";
     $query = mysqli_query($con, $sql);
     $rows = mysqli_fetch_row($query);
@@ -80,6 +83,9 @@ function countNotTugas()
 {
     global $con;
     $id = $_SESSION["ses_idPetugas"];
+    // menggunakan id_kelompok pada tugas
+    // $sql = "SELECT a.id_tugas FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_kelompok=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
+
     $sql = "SELECT a.id_tugas FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
     $query = mysqli_query($con, $sql);
     $rows = mysqli_fetch_row($query);
@@ -92,6 +98,9 @@ function notifikasiTugas()
 {
     global $con;
     $id = $_SESSION["ses_idPetugas"];
+    // menggunakan id_kelompok pada tugas
+    // $sql = "SELECT a.*, d.tanggal, d.catatan, d.nm_jadwal FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_kelompok=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
+    
     $sql = "SELECT a.*, d.tanggal, d.catatan, d.nm_jadwal FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
     
     $query = mysqli_query($con, $sql);
@@ -556,7 +565,11 @@ function tugas()
 function getTugas()
 {
     global $con;
+
     // $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, petugas b, wilayah c, jadwal d WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal ORDER BY a.id_tugas DESC";
+    // menggunakan id_kelompok pada tugas
+    // $sql = "SELECT a.*, b.nama_kelompok, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, kelompok b, wilayah c, jadwal d WHERE a.id_kelompok=b.id_kelompok AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal ORDER BY a.id_tugas DESC";
+    
     $sql = "SELECT a.*, b.nama_kelompok, c.nama as wilayah, d.nm_jadwal, d.tanggal FROM tugas a, kelompok b, wilayah c, jadwal d WHERE a.id_petugas=b.id_kelompok AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal ORDER BY a.id_tugas DESC";
     $query = mysqli_query($con, $sql);
     return $query;
@@ -565,6 +578,10 @@ function getTugas()
 function getTugasme($id)
 {
     global $con;
+
+    // menggunakan id_kelompok pada tugas
+    // $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_kelompok=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
+
     $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
     $query = mysqli_query($con, $sql);
     return $query;
@@ -572,6 +589,8 @@ function getTugasme($id)
 
 function insertTugas()
 {
+    // menggunakan id_kelompok pada tugas
+    // $sql = "INSERT INTO `tugas`(`id_kelompok`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES(
     global $con;
     $date = date("Y-m-d H:i:s");
     $sql = "INSERT INTO `tugas`(`id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES(
@@ -595,6 +614,15 @@ function insertTugas()
 function updateTugas()
 {
     global $con;
+
+    // menggunakan id_kelompok pada tugas
+    // $sql_ubah = "UPDATE tugas SET
+    //     id_kelompok ='" . $_POST['petugas'] . "',
+    //     id_jadwal ='" . $_POST['jadwal'] . "',
+    //     catatan_tugas ='" . $_POST['catatan'] . "',
+    //     keterangan ='" . $_POST['keterangan'] . "'
+    //     WHERE id_tugas ='" . $_POST['id'] . "'";
+    // $query_ubah = mysqli_query($con, $sql_ubah);
 
     $sql_ubah = "UPDATE tugas SET
         id_petugas ='" . $_POST['petugas'] . "',

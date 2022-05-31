@@ -47,8 +47,10 @@ include_once("koneksi.php");
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['keterangan'] ?></td>
                                                 <td>
-                                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <!-- menggunankan id_kelompok pada tugas -->
+                                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
+                                                    
                                                     <a href="?v=tugas_aksi&kode=<?php echo $data['id_tugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -111,6 +113,9 @@ include_once("koneksi.php");
                                                 <td>
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
+                                                    <!-- menggunakan id_kelompok pada tugas -->
+                                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a> -->
                                                 </td>
                                             </tr>
                                         <?php
