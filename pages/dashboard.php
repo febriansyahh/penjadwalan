@@ -101,6 +101,35 @@
                              <img src="assets/img/admin.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
                          </center>
                      </div>
+
+                     <div class="form-group mt-5">
+                         <span class="label label-info label-inline mr-2" style="font-size: 15px; border-radius: 5px 5px 0px 0px; padding: 15px; background-color: #2e74d6; color: #fff; width:25%">Pelaporan Terbaru</span>
+                         <hr class="cust-hr" style="border-top:4px solid #2e74d6;">
+                     </div>
+                 </div>
+
+                 <div class="form-group mb-4">
+                     <?php
+                        $plp = pelaporanDash();
+                        foreach ($plp as $key => $value) {
+                        ?>
+                         <div class="card mt-2" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                             <div class="row mt-3 mb-3" style="padding-left:10px">
+                                 <div class="col-3 ml-3">
+                                     <?= $value["nama"] ?> - <?= $value["bagian"] ?>
+                                 </div>
+                                 <div class="col-5">
+                                     Tugas : <?= $value["catatan_tugas"] ?> <br>
+                                     Pelaporan : <?= $value["catatan"] ?>
+                                 </div>
+                                 <div class="col-4 text-center">
+                                     <a href="<?php echo "file_data/pelaporan/" . $value['file'] ?>" target="_blank"><img src="assets/img/icon/file-cursor.png" alt="" style="width:45px; height: 45px;" target="_blank"></a>
+                                 </div>
+                             </div>
+                         </div>
+                     <?php
+                        }
+                        ?>
                  </div>
              <?php
                     break;
@@ -114,6 +143,38 @@
                              <img src="assets/img/layanan.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
                          </center>
                      </div>
+
+                     <div class="form-group mt-5">
+                         <span class="label label-info label-inline mr-2" style="font-size: 15px; border-radius: 5px 5px 0px 0px; padding: 15px; background-color: #2e74d6; color: #fff; width:25%">Pelaporan Tugas</span>
+                         <hr class="cust-hr" style="border-top:4px solid #2e74d6;">
+                     </div>
+                 </div>
+
+                 <div class="form-group mb-4">
+                     <?php
+                        $plp = dashMe();
+                        foreach ($plp as $key => $value) {
+                        ?>
+                         <div class="card mt-2" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                             <div class="row mt-3 mb-3" style="padding-left:10px">
+                                 <div class="col-3 ml-3">
+                                     <?= $value["nama"] ?> - <?= $value["bagian"] ?>
+                                 </div>
+                                 <div class="col-3">
+                                     Tugas : <?= $value["catatan_tugas"] ?> <br>
+                                     Pelaporan : <?= $value["catatan"] ?>
+                                 </div>
+                                 <div class="col-2">
+                                     Tgl. Submit : <?= date("d-m-Y", strtotime($value["submitted"])) ?> <br>
+                                 </div>
+                                 <div class="col-4 text-center">
+                                     <a href="<?php echo "file_data/pelaporan/" . $value['file'] ?>" target="_blank"><img src="assets/img/icon/file-cursor.png" alt="" style="width:45px; height: 45px;" target="_blank"></a>
+                                 </div>
+                             </div>
+                         </div>
+                     <?php
+                        }
+                        ?>
                  </div>
          <?php
                     break;

@@ -89,7 +89,7 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['rute'] ?></td>
                                         <td><?= $data['t_awal'] ?></td>
                                         <td><?= $data['t_akhir'] ?></td>

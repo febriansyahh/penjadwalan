@@ -23,7 +23,7 @@ include_once("koneksi.php");
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Petugas</th>
+                                            <th>Kelompok Tugas</th>
                                             <th>Wilayah</th>
                                             <th>Jadwal</th>
                                             <th>Tanggal</th>
@@ -39,14 +39,15 @@ include_once("koneksi.php");
                                         foreach ($a as $key => $data) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?= $data['nama'] ?></td>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?= $data['nama_kelompok'] ?></td>
                                                 <td><?= $data['wilayah'] ?></td>
                                                 <td><?= $data['nm_jadwal'] ?></td>
                                                 <td><?= $data['tanggal'] ?></td>
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['keterangan'] ?></td>
                                                 <td>
+                                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                                     <a href="?v=tugas_aksi&kode=<?php echo $data['id_tugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                                 </td>
@@ -100,7 +101,7 @@ include_once("koneksi.php");
                                         foreach ($b as $key => $data) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
+                                                <td><?php echo $no++; ?></td>
                                                 <td><?= $data['nama'] ?></td>
                                                 <td><?= $data['wilayah'] ?></td>
                                                 <td><?= $data['nm_jadwal'] ?></td>
@@ -146,7 +147,17 @@ include_once("koneksi.php");
                 <form action="?v=tugas_aksi" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Petugas</label>
+                            <label for="">Kelompok Tugas</label>
+                            <select class="form-select" name="petugas" aria-label="Default select example">
+                                <option selected>Pilih</option>
+                                <?php
+                                $a = kelompok();
+                                foreach ($a as $key => $value) {
+                                    echo "<option value='" . $value["id_kelompok"] . "'>" . $value["nama_kelompok"] . "</option>";
+                                }
+                                ?>
+                            </select>
+                            <!-- <label for="">Petugas</label>
                             <select class="form-select" name="petugas" aria-label="Default select example">
                                 <option selected>Pilih</option>
                                 <?php
@@ -155,7 +166,7 @@ include_once("koneksi.php");
                                     echo "<option value='" . $value["id_petugas"] . "'>" . $value["nama"] . "</option>";
                                 }
                                 ?>
-                            </select>
+                            </select> -->
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -261,12 +272,23 @@ include_once("koneksi.php");
                             <select class="form-select" name="petugas" id="editPetugas" aria-label="Default select example">
                                 <option selected>Pilih</option>
                                 <?php
+                                $a = kelompok();
+                                foreach ($a as $key => $value) {
+                                    echo "<option value='" . $value["id_kelompok"] . "'>" . $value["nama_kelompok"] . "</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <!-- <select class="form-select" name="petugas" id="editPetugas" aria-label="Default select example">
+                                <option selected>Pilih</option>
+                                <?php
                                 $a = petugas();
                                 foreach ($a as $key => $value) {
                                     echo "<option value='" . $value["id_petugas"] . "'>" . $value["nama"] . "</option>";
                                 }
                                 ?>
-                            </select>
+                            </select> -->
+                            
                         </div>
                         <div class="row">
                             <div class="col-6">

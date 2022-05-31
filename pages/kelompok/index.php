@@ -32,7 +32,7 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['nama_kelompok'] ?></td>
                                         <td><?= $data['nama'] ?></td>
                                         <td><?= $data['jumlah_anggota'] ?></td>

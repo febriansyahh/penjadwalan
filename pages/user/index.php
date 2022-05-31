@@ -82,7 +82,7 @@ include_once("koneksi.php");
                 <div class="card">
                     <div class="card-header">
 
-                        <h5 class="card-title">Data Wilayah</h5>
+                        <h5 class="card-title">Data User Pengguna</h5>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -104,7 +104,7 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['nama'] ?></td>
                                         <td><?= $data['username'] ?></td>
                                         <td>
@@ -153,7 +153,7 @@ include_once("koneksi.php");
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="h6 modal-title">Edit Data Rute</h2>
+                    <h2 class="h6 modal-title">Edit Data User</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="?v=user_aksi" method="post" enctype="multipart/form-data">

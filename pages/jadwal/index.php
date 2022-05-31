@@ -94,7 +94,7 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['nm_jadwal'] ?></td>
                                         <td><?= $data['nama_kelompok'] ?></td>
                                         <td><?= date('d-m-Y', strtotime($data['tanggal']));?></td>

@@ -35,7 +35,7 @@ $getkode = maxKodePetugas();
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['kode_petugas'] ?></td>
                                         <td><?= $data['nama'] ?></td>
                                         <td>
@@ -119,7 +119,12 @@ $getkode = maxKodePetugas();
 
                         <div class="form-group">
                             <label for="">Bagian</label>
-                            <input type="text" name="bagian" class="form-control">
+                            <!-- <input type="text" name="bagian" class="form-control"> -->
+                            <select name="bagian" class="form-control" id="" required>
+                                <option selected>Pilih</option>
+                                <option value="leader">Leader</option>
+                                <option value="anggota">Joniter (Anggota)</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
