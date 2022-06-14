@@ -103,7 +103,7 @@ include_once("koneksi.php");
                                         <td><?= $data['keterangan'] ?></td>
                                         <td>
                                             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editWilayah" onclick="editableWilayah(this)" data-id="<?php echo $data['id_wilayah'] . "~" . $data['nama'] . "~" . $data['area'] . "~" . $data['alamat'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                            <a href="?v=rute_aksi&kode=<?php echo $data['id_rute']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="?v=wilayah_aksi&kode=<?php echo $data['id_wilayah']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php

@@ -39,7 +39,7 @@ include_once("koneksi.php");
                                         <td>
                                             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editKelompok" onclick="editableKelompok(this)" data-id="<?php echo $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['nama_kelompok'] . "~" . $data['jumlah_anggota']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
                                             <!-- <a href="" class="btn btn-danger btn-sm">Hapus</a> -->
-                                            <a href="?v=rute_aksi&kode=<?php echo $data['id_kelompok']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="?v=kelompok_aksi&kode=<?php echo $data['id_kelompok']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php
