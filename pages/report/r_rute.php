@@ -11,7 +11,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times', 'B', 11);
 $pdf->ln(1);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Image('admin.png', 2, 3, 2, 'C');
+$pdf->Image('rps.png', 2, 3, 5, 'C');
 $pdf->Cell(25, 0.7, "Laporan Rekap Rute Penugasan", 0, 10, 'C');
 $pdf->Cell(25, 0.7, "PT. Jala Lintas Media", 0, 10, 'C');
 $pdf->Cell(25, 0.7, "Ds. Getas Pejaten Kecamatan Jati Kabupaten Kudus", 0, 10, 'C');

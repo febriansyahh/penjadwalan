@@ -11,7 +11,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times','B',11);
 $pdf->ln(1);
 $pdf->SetFont('Helvetica','B',12);
-$pdf->Image('admin.png', 2, 3, 2, 'C');
+$pdf->Image('rps.png', 2, 3, 5, 'C');
 $pdf->Cell(25,0.7,"Laporan Rekap Data Tugas",0,10,'C');
 $pdf->Cell(25,0.7,"PT. Jala Lintas Media",0,10,'C');
 $pdf->Cell(25,0.7,"Ds. Getas Pejaten Kecamatan Jati Kabupaten Kudus",0,10,'C');
@@ -34,8 +34,10 @@ $no=1;
                 $no = 1;
                 foreach ($a as $key => $data) 
                 {
+                    // var_dump($data);
+                    // die();
                     $pdf->Cell(1, 0.8, $no++, 1, 0, 'L');
-                    $pdf->Cell(3, 0.8, $data['nama'], 1, 0,'L');
+                    $pdf->Cell(3, 0.8, $data['nama_kelompok'], 1, 0,'L');
                     $pdf->Cell(7, 0.8, $data['wilayah'], 1, 0,'L');
                     $pdf->Cell(4, 0.8, $data['nm_jadwal'], 1, 0,'L');
                     $pdf->Cell(3, 0.8, date('d-m-Y', strtotime($data['tanggal'])), 1, 0,'L');

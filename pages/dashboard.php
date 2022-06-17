@@ -98,7 +98,7 @@
                      <div class="card mt-4">
                          <h5 class="text-center mt-4 mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;"><b>SELAMAT DATANG DI<br> SISTEM INFORMASI PENJADWALAN</b></h5>
                          <center>
-                             <img src="assets/img/admin.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
+                             <img src="assets/img/rps.png" alt="Admin" style="width:auto; height:200px;" class="mb-4">
                          </center>
                      </div>
 
@@ -142,6 +142,7 @@
                          <center>
                              <img src="assets/img/layanan.png" alt="Admin" style="width:200px; height:200px;" class="mb-4">
                          </center>
+                         <h5 class="text-center mt-4 mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;"><b>PT. RIZKI PRIMA SAKTI</b></h5>
                      </div>
 
                      <div class="form-group mt-5">
