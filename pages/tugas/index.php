@@ -50,7 +50,7 @@ include_once("koneksi.php");
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                                     <!-- menggunankan id_kelompok pada tugas -->
                                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
-                                                    
+
                                                     <a href="?v=tugas_aksi&kode=<?php echo $data['id_tugas']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -111,7 +111,7 @@ include_once("koneksi.php");
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['keterangan'] ?></td>
                                                 <td>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adadadad" onclick="detailTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
                                                     <!-- menggunakan id_kelompok pada tugas -->
                                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
@@ -261,6 +261,78 @@ include_once("koneksi.php");
         </div>
     </div>
 
+    <div class="modal fade" id="adadadad" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Selesaikan Tugas</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="?v=tugas_aksi" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Petugas</label>
+                            <input type="hidden" id="detIdTugas" name="id">
+                            <select class="form-select" name="petugas" id="detPetugas" aria-label="Default select example" disabled="true">
+                                <option selected>Pilih</option>
+                                <?php
+                                $a = kelompok();
+                                foreach ($a as $key => $value) {
+                                    echo "<option value='" . $value["id_kelompok"] . "'>" . $value["nama_kelompok"] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Wilayah</label>
+                                    <select class="form-select" name="wilayah" id="detWilayah" aria-label="Default select example" disabled="true">
+                                        <option selected>Pilih</option>
+                                        <?php
+                                        $a = wilayah();
+                                        foreach ($a as $key => $value) {
+                                            echo "<option value='" . $value["id_wilayah"] . "'>" . $value["nama"] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Jadwal</label>
+                                    <select class="form-select" name="jadwal" id="detJadwal" aria-label="Default select example" disabled="true">
+                                        <option selected>Pilih</option>
+                                        <?php
+                                        $a = jadwal();
+                                        foreach ($a as $key => $value) {
+                                            echo "<option value='" . $value["id_jadwal"] . "'>" . $value["nm_jadwal"] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Catatan</label><br>
+                            <textarea name="catatan" class="form-control" id="detCatatan" rows="3" placeholder="Masukkan catatan bila diperlukan" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Keterangan</label><br>
+                            <textarea name="keterangan" class="form-control" id="detKet" rows="3" placeholder="Masukkan keterangan" readonly></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="editTugas" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -293,7 +365,7 @@ include_once("koneksi.php");
                                 }
                                 ?>
                             </select> -->
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-6">

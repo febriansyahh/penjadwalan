@@ -20,7 +20,7 @@ include_once("koneksi.php");
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Petugas</th>
+                                    <th>Kelompok</th>
                                     <th>Wilayah</th>
                                     <th>Jadwal</th>
                                     <th>Tanggal</th>
@@ -35,8 +35,8 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
-                                        <td><?= $data['nama'] ?></td>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?= $data['nama_kelompok'] ?></td>
                                         <td><?= $data['wilayah'] ?></td>
                                         <td><?= $data['nm_jadwal'] ?></td>
                                         <td><?= $data['tanggal'] ?></td>

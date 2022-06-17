@@ -161,6 +161,18 @@ function editableTugas(param) {
       $("#editKet").val(exp[5]);
     }
 
+function detailTugas(param) {
+      let data = $(param).data("id");
+      let exp = data.split("~");
+  console.log(data);
+      $("#detIdTugas").val(exp[0]);
+      $("#detPetugas").val(exp[1]);
+      $("#detWilayah").val(exp[2]);
+      $("#detJadwal").val(exp[3]);
+      $("#detCatatan").val(exp[4]);
+      $("#detKet").val(exp[5]);
+    }
+
 function editablePelaporan(param) {
       let data = $(param).data("id");
       let exp = data.split("~");

@@ -866,7 +866,7 @@ function updateUser()
         nama ='" . $_POST['nama'] . "',
         username ='" . $_POST['username'] . "',
         password ='" . $_POST['password'] . "',
-        actived ='" . $_POST['actived'] . "',
+        actived ='" . $_POST['status'] . "',
         level ='" . $_POST['level'] . "',
         idPetugas ='" . $_POST['petugas'] . "'
         WHERE idUser ='" . $_POST['id'] . "'";

@@ -96,7 +96,7 @@ include_once("koneksi.php");
                                 foreach ($a as $key => $data) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?= $data['nama'] ?></td>
                                         <td><?= $data['area'] ?></td>
                                         <td><?= $data['alamat'] ?></td>

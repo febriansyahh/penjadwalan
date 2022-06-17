@@ -82,7 +82,7 @@ include_once("koneksi.php");
                                         <?php
                                         $a = wilayah();
                                         foreach ($a as $key => $value) {
-                                            echo "<option value='" . $value["id_wilayah"] . "'>" . $value["id_wilayah"] . "</option>";
+                                            echo "<option value='" . $value["id_wilayah"] . "'>" . $value["nama"] . "</option>";
                                         }
                                         ?>
                                     </select>
