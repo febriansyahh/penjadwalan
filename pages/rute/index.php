@@ -101,13 +101,7 @@ include_once("koneksi.php");
                                         <td><?= $data['lokasi'] ?></td>
                                         <td><?= $data['keterangan'] ?></td>
                                         <td>
-                                            <a href="https://<?php echo $data['koordinat']; ?>" class='btn btn-secondary btn-sm' target='_blank'><i class="fa fa-map"></i> Maps</a>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $maps = strtolower($data['maps']);
-                                            ?>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editRute" onclick="editableRute(this)" data-id="<?php echo $data['id_rute'] . "~" . $data['rute'] . "~" . $data['t_awal'] . "~" . $data['t_akhir'] . "~" . $data['jarak'] . "~" . $data['lokasi'] . "~" . $data['lokasi'] . "~" . $data['maps'] . "~" . $data['koordinat'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editRute" onclick="editableRute(this)" data-id="<?php echo $data['id_rute'] . "~" . $data['rute'] . "~" . $data['t_awal'] . "~" . $data['t_akhir'] . "~" . $data['jarak'] . "~" . $data['lokasi'] . "~" . $data['lokasi'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                             <!-- <a href="" class="btn btn-danger btn-sm">Hapus</a> -->
                                             <a href="?v=rute_aksi&kode=<?php echo $data['id_rute']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                         </td>
