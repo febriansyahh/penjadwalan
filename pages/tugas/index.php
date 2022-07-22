@@ -27,8 +27,9 @@ include_once("koneksi.php");
                                             <th>Wilayah</th>
                                             <th>Jadwal</th>
                                             <th>Tanggal</th>
+                                            <th>Deadline</th>
                                             <th>Catatan</th>
-                                            <th>Keterangan</th>
+                                            <!-- <th>Keterangan</th> -->
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
@@ -44,10 +45,11 @@ include_once("koneksi.php");
                                                 <td><?= $data['wilayah'] ?></td>
                                                 <td><?= $data['nm_jadwal'] ?></td>
                                                 <td><?= $data['tanggal'] ?></td>
+                                                <td><?= $data['deadline'] ?></td>
                                                 <td><?= $data['catatan_tugas'] ?></td>
-                                                <td><?= $data['keterangan'] ?></td>
+                                                <!-- <td><?= $data['keterangan'] ?></td> -->
                                                 <td>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] . "~" . $data['deadline'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                                     <!-- menggunankan id_kelompok pada tugas -->
                                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
 
@@ -100,6 +102,7 @@ include_once("koneksi.php");
                                         <?php
                                         $b = getTugasme($data_id);
                                         $no = 1;
+                                        $now = date('Y-m-d');
                                         foreach ($b as $key => $data) {
                                         ?>
                                             <tr>
@@ -111,8 +114,18 @@ include_once("koneksi.php");
                                                 <td><?= $data['catatan_tugas'] ?></td>
                                                 <td><?= $data['keterangan'] ?></td>
                                                 <td>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adadadad" onclick="detailTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adadadad" onclick="detailTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] . "~" . $data['maps'] . "~" . $data['koordinat'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
+                                                    <?php
+                                                    if ($now > $data['deadline']) {
+                                                    ?>
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-stop"></i> Deadline</a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <!-- menggunakan id_kelompok pada tugas -->
                                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editTugas" onclick="editableTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['id_wilayah'] . "~" . $data['id_jadwal'] . "~" . $data['catatan_tugas'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detail</a>
                                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_kelompok'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a> -->
@@ -162,16 +175,6 @@ include_once("koneksi.php");
                                 }
                                 ?>
                             </select>
-                            <!-- <label for="">Petugas</label>
-                            <select class="form-select" name="petugas" aria-label="Default select example">
-                                <option selected>Pilih</option>
-                                <?php
-                                $a = petugas();
-                                foreach ($a as $key => $value) {
-                                    echo "<option value='" . $value["id_petugas"] . "'>" . $value["nama"] . "</option>";
-                                }
-                                ?>
-                            </select> -->
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -214,6 +217,10 @@ include_once("koneksi.php");
                             <textarea name="keterangan" class="form-control" id="" rows="3" placeholder="Masukkan keterangan"></textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="">Deadline Tugas</label>
+                            <input type="date" class="form-control" name="deadline">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
@@ -315,7 +322,26 @@ include_once("koneksi.php");
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Catatan</label><br>
+                                    <textarea name="catatan" class="form-control" id="detCatatan" rows="3" placeholder="Masukkan catatan bila diperlukan" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Keterangan</label><br>
+                                    <textarea name="keterangan" class="form-control" id="detKet" rows="3" placeholder="Masukkan keterangan" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="showMaps" class="mt-3">
+
+                        </div>
+
+                        <!-- <div class="form-group">
                             <label for="">Catatan</label><br>
                             <textarea name="catatan" class="form-control" id="detCatatan" rows="3" placeholder="Masukkan catatan bila diperlukan" readonly></textarea>
                         </div>
@@ -323,7 +349,7 @@ include_once("koneksi.php");
                         <div class="form-group">
                             <label for="">Keterangan</label><br>
                             <textarea name="keterangan" class="form-control" id="detKet" rows="3" placeholder="Masukkan keterangan" readonly></textarea>
-                        </div>
+                        </div> -->
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -406,6 +432,11 @@ include_once("koneksi.php");
                         <div class="form-group">
                             <label for="">Keterangan</label><br>
                             <textarea name="keterangan" class="form-control" id="editKet" rows="3" placeholder="Masukkan keterangan"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Deadline</label>
+                            <input type="date" name="deadline" id="editDeadline" class="form-control">
                         </div>
 
                         <div class="modal-footer">

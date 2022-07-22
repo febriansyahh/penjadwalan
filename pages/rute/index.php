@@ -53,6 +53,10 @@ include_once("koneksi.php");
                                         <label for="">Keterangan</label><br>
                                         <textarea name="keterangan" class="form-control" id="" rows="3"></textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="">Titik Koordinat</label><br>
+                                        <textarea name="koordinat" class="form-control" id="" rows="3"></textarea>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
@@ -74,11 +78,12 @@ include_once("koneksi.php");
                                 <tr>
                                     <th>No</th>
                                     <th>Rute</th>
-                                    <th>Titik Awal</th>
-                                    <th>Titik Akhir</th>
+                                    <th>Titik</th>
+                                    <!-- <th>Titik Akhir</th> -->
                                     <th>Jarak</th>
                                     <th>Lokasi</th>
                                     <th>Keterangan</th>
+                                    <th>Koordinat</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -91,15 +96,20 @@ include_once("koneksi.php");
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?= $data['rute'] ?></td>
-                                        <td><?= $data['t_awal'] ?></td>
-                                        <td><?= $data['t_akhir'] ?></td>
+                                        <td><?= $data['t_awal'] . " - " . $data['t_akhir'] ?></td>
                                         <td><?= $data['jarak'] ?></td>
                                         <td><?= $data['lokasi'] ?></td>
                                         <td><?= $data['keterangan'] ?></td>
                                         <td>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editRute" onclick="editableRute(this)" data-id="<?php echo $data['id_rute'] . "~" . $data['rute'] . "~" . $data['t_awal'] . "~" . $data['t_akhir'] . "~" . $data['jarak'] . "~" . $data['lokasi'] . "~" . $data['keterangan'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                            <a href="https://<?php echo $data['koordinat']; ?>" class='btn btn-secondary btn-sm' target='_blank'><i class="fa fa-map"></i> Maps</a>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $maps = strtolower($data['maps']);
+                                            ?>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editRute" onclick="editableRute(this)" data-id="<?php echo $data['id_rute'] . "~" . $data['rute'] . "~" . $data['t_awal'] . "~" . $data['t_akhir'] . "~" . $data['jarak'] . "~" . $data['lokasi'] . "~" . $data['lokasi'] . "~" . $data['maps'] . "~" . $data['koordinat'] ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                                             <!-- <a href="" class="btn btn-danger btn-sm">Hapus</a> -->
-                                            <a href="?v=rute_aksi&kode=<?php echo $data['id_rute']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="?v=rute_aksi&kode=<?php echo $data['id_rute']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php
@@ -135,6 +145,10 @@ include_once("koneksi.php");
                             <input type="hidden" name="id" id="editId" class="form-control" placeholder="Rute">
                             <input type="text" name="rute" id="editRutenama" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="">Lokasi Titik</label>
+                            <input type="text" name="koordinat" id="editKoor" class="form-control">
+                        </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -166,6 +180,10 @@ include_once("koneksi.php");
                         <div class="form-group">
                             <label for="">Keterangan</label><br>
                             <textarea name="keterangan" class="form-control" id="editKet" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Maps</label><br>
+                            <textarea name="maps" class="form-control" id="editMaps" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

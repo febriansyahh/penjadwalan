@@ -51,7 +51,7 @@ function notifTugas()
     // menggunakan id_kelompok pada tugas
     // $sql = "SELECT id_tugas FROM tugas a, kelompok b, petugas c WHERE a.id_kelompok=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas = '$id') AND c.id_petugas = '$id'";
     
-    $sql = "SELECT id_tugas FROM tugas a, kelompok b, petugas c WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas = '$id') AND c.id_petugas = '$id'";
+    $sql = "SELECT id_tugas FROM tugas a, kelompok b, petugas c WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas = '$id') AND c.id_petugas = '$id' AND NOW() <= a.deadline";
     $query = mysqli_query($con, $sql);
     $rows = mysqli_fetch_row($query);
     $idtugas = $rows[0];
@@ -101,7 +101,7 @@ function notifikasiTugas()
     // menggunakan id_kelompok pada tugas
     // $sql = "SELECT a.*, d.tanggal, d.catatan, d.nm_jadwal FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_kelompok=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
     
-    $sql = "SELECT a.*, d.tanggal, d.catatan, d.nm_jadwal FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id')";
+    $sql = "SELECT a.*, d.tanggal, d.catatan, d.nm_jadwal FROM tugas a, kelompok b, petugas c, jadwal d WHERE a.id_petugas=b.id_kelompok AND c.id_kelompok=b.id_kelompok AND a.id_jadwal=d.id_jadwal AND c.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan WHERE id_petugas='$id') ORDER BY a.deadline ASC";
     
     $query = mysqli_query($con, $sql);
 
@@ -169,13 +169,23 @@ function rute()
 function insertRute()
 {
     global $con;
-    $sql = "INSERT INTO `rute`(`rute`, `t_awal`, `t_akhir`, `jarak`, `lokasi`, `keterangan`) VALUES(
+    // $sql = "INSERT INTO `rute`(`rute`, `t_awal`, `t_akhir`, `jarak`, `lokasi`, `keterangan`) VALUES(
+    //             '" . $_POST['rute'] . "',
+    //             '" . $_POST['tawal'] . "',
+    //             '" . $_POST['takhir'] . "',
+    //             '" . $_POST['jarak'] . "',
+    //             '" . $_POST['lokasi'] . "',
+    //             '" . $_POST['keterangan'] . "')";
+
+    $sql = "INSERT INTO `rute`(`rute`, `t_awal`, `t_akhir`, `jarak`, `lokasi`, `keterangan`, `maps`, `koordinat`) VALUES(
                 '" . $_POST['rute'] . "',
                 '" . $_POST['tawal'] . "',
                 '" . $_POST['takhir'] . "',
                 '" . $_POST['jarak'] . "',
                 '" . $_POST['lokasi'] . "',
-                '" . $_POST['keterangan'] . "')";
+                '" . $_POST['keterangan'] . "',
+                '" . $_POST['maps'] . "',
+                '" . $_POST['koordinat'] . "')";
     $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
 
     if ($query_insert) {
@@ -197,8 +207,19 @@ function updateRute()
         t_akhir='" . $_POST['takhir'] . "',
         jarak='" . $_POST['jarak'] . "',
         lokasi='" . $_POST['lokasi'] . "',
-        keterangan='" . $_POST['keterangan'] . "'
+        keterangan='" . $_POST['keterangan'] . "',
+        maps='" . $_POST['maps'] . "',
+        koordinat='" . $_POST['koordinat'] . "'
         WHERE id_rute='" . $_POST['id'] . "'";
+
+    // $sql_ubah = "UPDATE rute SET
+    //     rute='" . $_POST['rute'] . "',
+    //     t_awal='" . $_POST['tawal'] . "',
+    //     t_akhir='" . $_POST['takhir'] . "',
+    //     jarak='" . $_POST['jarak'] . "',
+    //     lokasi='" . $_POST['lokasi'] . "',
+    //     keterangan='" . $_POST['keterangan'] . "'
+    //     WHERE id_rute='" . $_POST['id'] . "'";
     $query_ubah = mysqli_query($con, $sql_ubah);
 
     if ($query_ubah) {
@@ -246,11 +267,13 @@ function insertWilayah()
     //             '" . $_POST['lokasi'] . "',
     //             '" . $_POST['keterangan'] . "')";
 
-    $sql = "INSERT INTO `wilayah`(`nama`, `area`, `alamat`, `keterangan`) VALUES(
+    $sql = "INSERT INTO `wilayah`(`nama`, `area`, `alamat`, `keterangan`, `maps`, `koordinat`) VALUES(
                 '" . $_POST['nama'] . "',
                 '" . $_POST['area'] . "',
                 '" . $_POST['alamat'] . "',
-                '" . $_POST['keterangan'] . "')";
+                '" . $_POST['keterangan'] . "',
+                '" . $_POST['maps'] . "',
+                '" . $_POST['koordinat'] . "')";
     $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
 
     if ($query_insert) {
@@ -270,7 +293,9 @@ function updateWilayah()
         nama='" . $_POST['nama'] . "',
         area='" . $_POST['area'] . "',
         alamat='" . $_POST['alamat'] . "',
-        keterangan='" . $_POST['keterangan'] . "'
+        keterangan='" . $_POST['keterangan'] . "',
+        maps='" . $_POST['maps'] . "',
+        koordinat='" . $_POST['koordinat'] . "'
         WHERE id_wilayah='" . $_POST['id'] . "'";
     $query_ubah = mysqli_query($con, $sql_ubah);
 
@@ -582,7 +607,9 @@ function getTugasme($id)
     // menggunakan id_kelompok pada tugas
     // $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_kelompok=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
 
-    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
+    // $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
+    $sql = "SELECT a.*, b.nama, c.nama as wilayah, d.nm_jadwal, d.tanggal, e.nama_kelompok, c.maps, c.koordinat FROM tugas a, petugas b, wilayah c, jadwal d, kelompok e WHERE a.id_petugas=b.id_petugas AND a.id_wilayah=c.id_wilayah AND a.id_jadwal=d.id_jadwal AND b.id_kelompok=e.id_kelompok AND a.id_petugas='$id' AND a.id_tugas NOT IN (SELECT id_tugas FROM pelaporan) ORDER BY a.id_tugas DESC ";
+
     $query = mysqli_query($con, $sql);
     return $query;
 }
@@ -593,11 +620,12 @@ function insertTugas()
     // $sql = "INSERT INTO `tugas`(`id_kelompok`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES(
     global $con;
     $date = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO `tugas`(`id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES(
+    $sql = "INSERT INTO `tugas`(`id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `deadline`, `keterangan`, `submitted`) VALUES(
                 '" . $_POST['petugas'] . "',
                 '" . $_POST['wilayah'] . "',
                 '" . $_POST['jadwal'] . "',
                 '" . $_POST['catatan'] . "',
+                '" . $_POST['deadline'] . "',
                 '" . $_POST['keterangan'] . "',
                 '" . $date . "')";
     $query_insert = mysqli_query($con, $sql) or die(mysqli_connect_error());
@@ -628,6 +656,7 @@ function updateTugas()
         id_petugas ='" . $_POST['petugas'] . "',
         id_jadwal ='" . $_POST['jadwal'] . "',
         catatan_tugas ='" . $_POST['catatan'] . "',
+        deadline ='" . $_POST['deadline'] . "',
         keterangan ='" . $_POST['keterangan'] . "'
         WHERE id_tugas ='" . $_POST['id'] . "'";
     $query_ubah = mysqli_query($con, $sql_ubah);

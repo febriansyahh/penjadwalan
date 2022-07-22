@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2022 at 09:18 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Jul 22, 2022 at 08:20 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -43,7 +42,11 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `id_kelompok`, `nm_jadwal`, `tanggal`, `id_rute`, `catatan`, `tgl_input`) VALUES
-(1, 1, 'jadwal satu', '2022-05-21', 2, 'ini coba', '2022-05-21 03:58:00');
+(1, 1, 'KRG21Kudus', '2022-05-21', 2, 'Karangbener to Gondangmanis', '2022-05-21 03:58:00'),
+(2, 1, 'DW27Kudus', '2022-06-27', 3, 'Dawe to Grobogan', '2022-06-27 06:50:01'),
+(3, 3, 'KRG27Kudus', '2022-06-27', 2, 'Karangbener to Gondangmanis', '2022-06-27 06:50:35'),
+(4, 3, 'DW28Kudus', '2022-06-28', 3, 'Dawe to Gebog', '2022-06-27 06:50:56'),
+(5, 3, 'PAT29Pati', '2022-06-29', 4, 'Kayen to Grobogan', '2022-06-27 06:59:24');
 
 -- --------------------------------------------------------
 
@@ -63,7 +66,8 @@ CREATE TABLE `kelompok` (
 --
 
 INSERT INTO `kelompok` (`id_kelompok`, `nama_kelompok`, `id_wilayah`, `jumlah_anggota`) VALUES
-(1, 'Kelompok satu', 1, 6);
+(1, 'MS 1', 1, 3),
+(3, 'MS 2', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -86,7 +90,10 @@ CREATE TABLE `pelaporan` (
 --
 
 INSERT INTO `pelaporan` (`id_pelaporan`, `id_tugas`, `id_petugas`, `catatan`, `file`, `status`, `submitted`) VALUES
-(1, 1, 1, 'ini coba', 'Pelaporan_PRT2022001_2022-05-23.pdf', 1, '2022-05-23 08:43:12');
+(1, 1, 1, 'ini coba', 'Pelaporan_PRT2022001_2022-05-23.pdf', 1, '2022-05-23 08:43:12'),
+(2, 3, 1, 'clear', '', 0, '2022-06-27 07:07:32'),
+(3, 2, 1, 'jaringan aman clear', 'Pelaporan_PRT2022001_2022-07-14.jpg', 1, '2022-07-14 06:29:57'),
+(4, 7, 1, 'clear', 'Pelaporan_PRT2022001_2022-07-16.jpeg', 1, '2022-07-16 12:44:28');
 
 -- --------------------------------------------------------
 
@@ -112,7 +119,10 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `kode_petugas`, `nama`, `is_gender`, `alamat`, `no_hp`, `bagian`, `id_kelompok`, `status`, `registered`) VALUES
-(1, 'PRT-2022-001', 'Yudha', 1, 'Ploso', '08980689478', 'Jaringan', 1, 1, '2022-05-23 05:03:34');
+(1, 'PRT-2022-001', 'Shodiq', 0, 'Kandangmas', '08980689478', 'leader', 1, 0, '2022-05-23 05:03:34'),
+(2, 'PRT-2022-002', 'Matori Al Ikhsan', 1, 'Karangmalang', '08980689478', 'leader', 3, 1, '2022-06-27 06:36:42'),
+(3, 'PRT-2022-003', 'Firmansyah', 1, 'Pati', '089649452825', 'anggota', 3, 1, '2022-06-27 06:38:37'),
+(4, 'PRT-2022-004', 'Tulus', 1, 'Kaliwungu', '08976547896', 'anggota', 3, 1, '2022-06-27 06:39:11');
 
 -- --------------------------------------------------------
 
@@ -135,7 +145,9 @@ CREATE TABLE `rute` (
 --
 
 INSERT INTO `rute` (`id_rute`, `rute`, `t_awal`, `t_akhir`, `jarak`, `lokasi`, `keterangan`) VALUES
-(2, 'Rute Pertama', 'KDS-01', 'KDS-13', 430, 'Jalan Pangeran Puger', 'Pengumuman keterangan');
+(2, 'Karangbener', '14KDS035', '14KDS013', 5600, 'Karangbener to Gondangmanis', 'MS Proyek'),
+(3, 'Dawe', '14KDS125', '14KDS120', 4300, 'Dawe to Gebog', ''),
+(4, 'Kayen', 'DF14PAT015', 'DF14GRO010', 8500, 'Kayen to Grobogan', '');
 
 -- --------------------------------------------------------
 
@@ -149,6 +161,7 @@ CREATE TABLE `tugas` (
   `id_wilayah` int(11) NOT NULL,
   `id_jadwal` int(11) NOT NULL,
   `catatan_tugas` varchar(200) NOT NULL,
+  `deadline` date DEFAULT NULL,
   `keterangan` text NOT NULL,
   `submitted` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -157,8 +170,14 @@ CREATE TABLE `tugas` (
 -- Dumping data for table `tugas`
 --
 
-INSERT INTO `tugas` (`id_tugas`, `id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `keterangan`, `submitted`) VALUES
-(1, 1, 1, 1, 'coba', 'coba', '2022-05-23 06:03:21');
+INSERT INTO `tugas` (`id_tugas`, `id_petugas`, `id_wilayah`, `id_jadwal`, `catatan_tugas`, `deadline`, `keterangan`, `submitted`) VALUES
+(2, 1, 1, 1, '', '2022-07-21', '', '2022-06-27 07:03:08'),
+(3, 1, 6, 5, 'jaringan down kayen to grobogan', '2022-07-28', '', '2022-06-27 07:03:50'),
+(4, 3, 2, 3, '', '2022-01-30', '', '2022-06-27 07:04:07'),
+(5, 3, 6, 5, 'support', '2022-01-12', '', '2022-06-27 07:04:28'),
+(6, 1, 6, 5, 'cek jaringan', '2022-07-22', '', '2022-06-30 04:47:04'),
+(7, 1, 6, 5, 'qwertyyuioplkjhg', '2022-07-26', 'mnbvcxxzz', '2022-07-16 12:36:32'),
+(8, 3, 1, 1, 'YA COBA KALI INI', '2022-07-27', 'COBA TAMBAH DEADLINE', '2022-07-21 16:32:54');
 
 -- --------------------------------------------------------
 
@@ -183,7 +202,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`idUser`, `nama`, `username`, `password`, `actived`, `level`, `idPetugas`, `registered`) VALUES
 (1, 'Administrator', 'admin', 'admin', 1, 0, 0, '2022-05-19 00:00:00'),
-(3, 'Yudha', 'yudha', '123', 1, 1, 1, '2022-05-23 06:38:27');
+(3, 'Shodiq', 'shodiq', '123', 1, 1, 1, '2022-05-23 06:38:27'),
+(4, 'Matori Al Ikhsan', 'ikhsan', '123', 1, 1, 2, '2022-06-27 07:05:50');
 
 -- --------------------------------------------------------
 
@@ -196,15 +216,22 @@ CREATE TABLE `wilayah` (
   `nama` varchar(200) NOT NULL,
   `area` varchar(200) NOT NULL,
   `alamat` text NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `maps` text NOT NULL,
+  `koordinat` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `wilayah`
 --
 
-INSERT INTO `wilayah` (`id_wilayah`, `nama`, `area`, `alamat`, `keterangan`) VALUES
-(1, 'Ploso', 'Sekitar AKBID', 'Ploso ', 'Coba');
+INSERT INTO `wilayah` (`id_wilayah`, `nama`, `area`, `alamat`, `keterangan`, `maps`, `koordinat`) VALUES
+(1, 'Kudus', '14KDS035', 'Karangbener Kecamatan Bae Kudus', 'Coba', '/maps/embed?pb=!1m18!1m12!1m3!1d15847.55957931713!2d110.8672131!3d-6.7832521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c52d5ac49401%3A0x98bc171685ba90ea!2sUniversitas%20Muria%20Kudus!5e0!3m2!1sid!2sid!4v1658125617051!5m2!1sid!2sid', 'g.page/muriakudus?share'),
+(2, 'Kudus 2', 'DF14KDS013', 'Gondangmanis Bae Kudus', '', '', ''),
+(3, 'Demak', 'DF14DMK076', 'Kuncir Kecamatan Wonosalam Kabupaten Demak', '', '', ''),
+(4, 'Grobogan', 'DF14GRO030', 'Grobogan Kota', '', '', ''),
+(5, 'Jepara', 'DF14JPR032', 'Mayong Kecamtan Mayong Jepara', '', '', ''),
+(6, 'Pati', 'DF14PAT056', 'Kayen Kecamatan Kayen Kabupaten Pati', '', '/maps/embed?pb=!1m18!1m12!1m3!1d15847.55957931713!2d110.8672131!3d-6.7832521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c52d5ac49401%3A0x98bc171685ba90ea!2sUniversitas%20Muria%20Kudus!5e0!3m2!1sid!2sid!4v1658125617051!5m2!1sid!2sid', 'g.page/muriakudus?share');
 
 -- --------------------------------------------------------
 
@@ -285,49 +312,49 @@ ALTER TABLE `wilayah_api`
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kelompok`
 --
 ALTER TABLE `kelompok`
-  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pelaporan`
 --
 ALTER TABLE `pelaporan`
-  MODIFY `id_pelaporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pelaporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rute`
 --
 ALTER TABLE `rute`
-  MODIFY `id_rute` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rute` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wilayah`
 --
 ALTER TABLE `wilayah`
-  MODIFY `id_wilayah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_wilayah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `wilayah_api`

@@ -1,0 +1,16 @@
+Ketika akan insert data atau ubah pada tabel wilayah
+* untuk field maps diambilkan dari embed gmaps
+caranya :
+- cari di maps titik yang akan ditambahkan, lalu klik dan pilih opsi bagikan
+- Pilih sematkan peta maka akan muncul link iframe 
+- Untuk memasukkan link tersebut adalah dengan cara memasukkan link srcnya saja dimulai dari /maps kebelakang 
+ Contoh : <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15847.55932105501!2d110.8672247!3d-6.78325995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c52d5ac49401%3A0x98bc171685ba90ea!2sUniversitas%20Muria%20Kudus!5e0!3m2!1sid!2sid!4v1658470569650!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ Menjadi : /maps/embed?pb=!1m18!1m12!1m3!1d15847.55932105501!2d110.8672247!3d-6.78325995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c52d5ac49401%3A0x98bc171685ba90ea!2sUniversitas%20Muria%20Kudus!5e0!3m2!1sid!2sid!4v1658470569650!5m2!1sid!2sid
+
+* untuk field koordinat diambilkan dari gmaps juga
+cara nya :
+- cari di maps titik yang akan ditambahkan, lalu klik dan pilih opsi bagikan
+- Pilih sematkan peta maka akan muncul tab kirim link pilih salin link
+- Yang dimasukkan pada table hanya link setelah https:// saja 
+contoh : https://g.page/muriakudus?share
+menjadi : g.page/muriakudus?share

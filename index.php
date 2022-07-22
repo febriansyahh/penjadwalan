@@ -61,6 +61,7 @@ error_reporting(E_ALL ^ E_NOTICE);
   <!-- Volt CSS -->
   <link type="text/css" href="css/volt.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" /> -->
 
 
@@ -499,7 +500,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                     <h4 class="h6 mb-0 text-small"><?= $value["nm_jadwal"] ?></h4>
                                   </div>
                                   <div class="text-end">
-                                    <small class="text-danger"><?= date('d-m-Y', strtotime($value['tanggal'])) ?></small>
+                                    <small class="text-danger"><?= date('d-m-Y', strtotime($value['deadline'])) ?></small>
                                   </div>
                                 </div>
                                 <p class="font-small mt-1 mb-0"><?= $value["catatan_tugas"] ?></p>
@@ -715,7 +716,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 
   <!-- Volt JS -->
   <script src="assets/js/volt.js"></script>
-
 
 </body>
 

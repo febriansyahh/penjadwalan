@@ -97,7 +97,7 @@ include_once("koneksi.php");
                                         <td><?php echo $no++; ?></td>
                                         <td><?= $data['nm_jadwal'] ?></td>
                                         <td><?= $data['nama_kelompok'] ?></td>
-                                        <td><?= date('d-m-Y', strtotime($data['tanggal']));?></td>
+                                        <td><?= date('d-m-Y', strtotime($data['tanggal'])); ?></td>
                                         <td><?= $data['rute'] ?></td>
                                         <td><?= $data['catatan'] ?></td>
                                         <td>
@@ -162,7 +162,7 @@ include_once("koneksi.php");
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Rute</label>
-                                    <select class="form-select form-select-sm" name="rute" id="editIdRute" aria-label=".form-select-sm">
+                                    <select class="form-select form-select-sm" name="rute" id="editIdRute" onchange="showmaps(this.value)" aria-label=".form-select-sm">
                                         <option value="" selected>Pilih</option>
                                         <?php
                                         $rute = rute();

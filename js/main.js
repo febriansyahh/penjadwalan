@@ -15,6 +15,7 @@ $("#adm_plp").DataTable({
       { width: "15%" }, // Opsi
     ],
   });
+
   
 
 function myProfile(param) {
@@ -51,7 +52,22 @@ function editableRute(param) {
   $("#editJarak").val(exp[4]);
   $("#editLokasi").val(exp[5]);
   $("#editKet").val(exp[6]);
+  // $("#editMaps").val(exp[7]);
+  // $("#editKoor").val(exp[8]);
 }
+    
+// function editableRute(param) {
+//   let data = $(param).data("id");
+//   let exp = data.split("~");
+//   console.log(data);
+//   $("#editId").val(exp[0]);
+//   $("#editRutenama").val(exp[1]);
+//   $("#editTitikAwal").val(exp[2]);
+//   $("#editTitikAkhir").val(exp[3]);
+//   $("#editJarak").val(exp[4]);
+//   $("#editLokasi").val(exp[5]);
+//   $("#editKet").val(exp[6]);
+// }
 
 function editableWilayah(param) {
   let data = $(param).data("id");
@@ -62,6 +78,8 @@ function editableWilayah(param) {
   $("#editArea").val(exp[2]);
   $("#editAlamat").val(exp[3]);
   $("#editKeterangan").val(exp[4]);
+  $("#editMaps").val(exp[5]);
+  $("#editKoordinat").val(exp[6]);
 }
 
 // function editableJadwal(param) {
@@ -159,18 +177,23 @@ function editableTugas(param) {
       $("#editJadwal").val(exp[3]);
       $("#editCatatan").val(exp[4]);
       $("#editKet").val(exp[5]);
+      $("#editDeadline").val(exp[6]);
     }
 
 function detailTugas(param) {
       let data = $(param).data("id");
       let exp = data.split("~");
-  console.log(data);
+      console.log(exp[6]);
       $("#detIdTugas").val(exp[0]);
       $("#detPetugas").val(exp[1]);
       $("#detWilayah").val(exp[2]);
       $("#detJadwal").val(exp[3]);
       $("#detCatatan").val(exp[4]);
       $("#detKet").val(exp[5]);
+      $("#detMaps").val(exp[6]);
+      $("#detKoor").val(exp[7]);
+  
+    $('#showMaps').html(`<iframe src="${'https://google.com/' + exp[6]}" height="520px" width="100%"></iframe>`);
     }
 
 function editablePelaporan(param) {
@@ -284,6 +307,22 @@ function detailPelaporan(param) {
     }
     
 }
+
+function showmaps(str) {
+  console.log('INI MAPS');
+  // if (str == "") {
+  //     document.getElementById("motor").innerHTML= "";
+  //     return;
+  //   }
+  //   const xhtp = new XMLHttpRequest();
+  //   xhtp.onload = function(){
+  //     document.getElementById("motor").innerHTML = this.responseText;
+  //   }
+  //   xhtp.open("GET", "panel/booking/ajax.php?q=" + str);
+  //   xhtp.send();
+
+}
+
 
 function getProvinsi() {
 //     var settings = {
