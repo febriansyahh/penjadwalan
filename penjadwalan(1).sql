@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2022 at 08:20 AM
+-- Generation Time: Jul 22, 2022 at 08:25 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -227,7 +227,7 @@ CREATE TABLE `wilayah` (
 
 INSERT INTO `wilayah` (`id_wilayah`, `nama`, `area`, `alamat`, `keterangan`, `maps`, `koordinat`) VALUES
 (1, 'Kudus', '14KDS035', 'Karangbener Kecamatan Bae Kudus', 'Coba', '/maps/embed?pb=!1m18!1m12!1m3!1d15847.55957931713!2d110.8672131!3d-6.7832521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c52d5ac49401%3A0x98bc171685ba90ea!2sUniversitas%20Muria%20Kudus!5e0!3m2!1sid!2sid!4v1658125617051!5m2!1sid!2sid', 'g.page/muriakudus?share'),
-(2, 'Kudus 2', 'DF14KDS013', 'Gondangmanis Bae Kudus', '', '', ''),
+(2, 'Kudus 2', 'DF14KDS013', 'Gang 15 Undaan Lor Kecamatan undaan', '', '', 'goo.gl/maps/Hq4TkKTKrbG7X7SWA'),
 (3, 'Demak', 'DF14DMK076', 'Kuncir Kecamatan Wonosalam Kabupaten Demak', '', '', ''),
 (4, 'Grobogan', 'DF14GRO030', 'Grobogan Kota', '', '', ''),
 (5, 'Jepara', 'DF14JPR032', 'Mayong Kecamtan Mayong Jepara', '', '', ''),
