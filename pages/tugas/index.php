@@ -118,11 +118,11 @@ include_once("koneksi.php");
                                                     <?php
                                                     if ($now > $data['deadline']) {
                                                     ?>
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
-                                                    <?php
+                                                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-stop"></i> Deadline</a>
+                                                        <?php
                                                     } else {
-                                                    ?>
-                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-stop"></i> Deadline</a>
+                                                        ?>
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#clearTugas" onclick="selesaikanTugas(this)" data-id="<?php echo $data['id_tugas'] . "~" . $data['id_petugas'] . "~" . $data['catatan_tugas'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Selesaikan</a>
                                                     <?php
                                                     }
                                                     ?>
